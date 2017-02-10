@@ -14,8 +14,12 @@ debugger::comm::PvdConnection* vd_connection;
 //simulation objects
 PxScene* scene;
 PxRigidDynamic* box;
+PxRigidDynamic* box1;
+PxRigidStatic* box2;
 PxRigidStatic* plane;
 PxVec3 startPos(0, 10, -10);
+PxVec3 startPos1(5, 10, -10);
+PxVec3 startPos2(10, 10, -10);
 PxVec3 force(100, 0, 0);
 
 ///Initialise PhysX objects
@@ -96,8 +100,28 @@ void InitScene()
 	//update the mass of the box
 	PxRigidBodyExt::updateMassAndInertia(*box, 1.f); //density of 1kg/m^3
 	scene->addActor(*box);
-	PxReal mass = box->getMass();
-	cout << "Mass=" << mass << endl;
+
+	box1 = physics->createRigidDynamic(PxTransform(PxVec3(0.f, 10.f, 10.f)));
+	box->setRigidBodyFlag(PxRigidBodyFlag::eKINEMATIC, true); //kinematic actors cant be affected by external forces
+	box1->setGlobalPose(PxTransform(startPos1));
+	//create a box shape of 1m x 1m x 1m size (values are provided in halves)
+	box1->createShape(PxBoxGeometry(.5f, .5f, .5f), *default_material);
+	//update the mass of the box
+	PxRigidBodyExt::updateMassAndInertia(*box1, 1.f); //density of 1kg/m^3
+	scene->addActor(*box1);
+
+	box2 = physics->createRigidStatic(PxTransform(PxVec3(0.f, 10.f, 10.f)));
+	box2->setGlobalPose(PxTransform(startPos2));
+	//create a box shape of 1m x 1m x 1m size (values are provided in halves)
+	box2->createShape(PxBoxGeometry(.5f, .5f, .5f), *default_material);
+	//update the mass of the box
+	//PxRigidBodyExt::updateMassAndInertia(*box2, 1.f); //density of 1kg/m^3
+	scene->addActor(*box2);
+
+
+
+	//PxReal mass = box->getMass(); //get mass and output it
+	//cout << "Mass=" << mass << endl;
 	//box->addForce(force);
 }
 
