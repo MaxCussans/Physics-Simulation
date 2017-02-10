@@ -15,7 +15,7 @@ debugger::comm::PvdConnection* vd_connection;
 PxScene* scene;
 PxRigidDynamic* box;
 PxRigidStatic* plane;
-PxVec3 startPos(10, 0, 0);
+PxVec3 startPos(0, 0.5, 0);
 
 ///Initialise PhysX objects
 bool PxInit()
@@ -91,10 +91,12 @@ void InitScene()
 	box = physics->createRigidDynamic(PxTransform(PxVec3(0.f, 10.f, 0.f)));
 	box->setGlobalPose(PxTransform(startPos));
 	//create a box shape of 1m x 1m x 1m size (values are provided in halves)
-	box->createShape(PxBoxGeometry(.5f, .5f, .5f), *default_material);
+	box->createShape(PxBoxGeometry(1.f, 1.f, 1.f), *default_material);
 	//update the mass of the box
 	PxRigidBodyExt::updateMassAndInertia(*box, 1.f); //density of 1kg/m^3
 	scene->addActor(*box);
+	PxReal mass = box->getMass();
+	cout << "Mass=" << mass << endl;
 }
 
 /// Perform a single simulation step
