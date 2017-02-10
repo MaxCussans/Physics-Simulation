@@ -86,7 +86,7 @@ void InitScene()
 	scene->setGravity(PxVec3(0.f, -9.81f, 0.f));
 
 	//materials
-	PxMaterial* default_material = physics->createMaterial(0.f, 0.f, .5f);   //static friction, dynamic friction, restitution
+	PxMaterial* default_material = physics->createMaterial(0.f, 0.f, .0f);   //static friction, dynamic friction, restitution
 
 	//create a static plane (XZ)
 	plane = PxCreatePlane(*physics, PxPlane(PxVec3(0.f, 1.f, 0.f), 0.f), *default_material);
@@ -174,4 +174,31 @@ int main()
 	PxRelease();
 
 	return 0;
+}
+
+PxRigidDynamic* CreateBox(PxVec3 initPos, PxVec3 dimensions, PxReal density, PxMaterial* material)
+{
+	PxRigidDynamic* tempBox;
+	tempBox = physics->createRigidDynamic(PxTransform(initPos));
+	tempBox->createShape(PxBoxGeometry(dimensions), *material);
+	PxRigidBodyExt::updateMassAndInertia(*tempBox, density);
+	return tempBox;
+}
+
+PxRigidDynamic* CreateCapsule(PxVec3 initPos, PxReal radius, PxReal halfheight, PxReal density, PxMaterial* material)
+{
+	PxRigidDynamic* tempCap;
+	tempCap = physics->createRigidDynamic(PxTransform(initPos));
+	tempCap->createShape(PxCapsuleGeometry(radius, halfheight), *material);
+	PxRigidBodyExt::updateMassAndInertia(*tempCap, density);
+	return tempCap;
+}
+
+PxRigidDynamic* CreateSphere(PxVec3 initPos, PxReal radius, PxReal density, PxMaterial* material)
+{
+	PxRigidDynamic* tempSphere;
+	tempSphere = physics->createRigidDynamic(PxTransform(initPos));
+	tempSphere->createShape(PxSphereGeometry(radius), *material);
+	PxRigidBodyExt::updateMassAndInertia(*tempSphere, density);
+	return tempSphere;
 }
