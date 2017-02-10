@@ -16,6 +16,7 @@ PxScene* scene;
 PxRigidDynamic* box;
 PxRigidStatic* plane;
 PxVec3 startPos(0, 0.5, 0);
+PxVec3 force(100, 0, 0);
 
 ///Initialise PhysX objects
 bool PxInit()
@@ -81,7 +82,7 @@ void InitScene()
 	scene->setGravity(PxVec3(0.f, -9.81f, 0.f));
 
 	//materials
-	PxMaterial* default_material = physics->createMaterial(0.f, 0.f, 0.f);   //static friction, dynamic friction, restitution
+	PxMaterial* default_material = physics->createMaterial(0.f, .2f, 0.f);   //static friction, dynamic friction, restitution
 
 	//create a static plane (XZ)
 	plane = PxCreatePlane(*physics, PxPlane(PxVec3(0.f, 1.f, 0.f), 0.f), *default_material);
@@ -91,12 +92,13 @@ void InitScene()
 	box = physics->createRigidDynamic(PxTransform(PxVec3(0.f, 10.f, 0.f)));
 	box->setGlobalPose(PxTransform(startPos));
 	//create a box shape of 1m x 1m x 1m size (values are provided in halves)
-	box->createShape(PxBoxGeometry(1.f, 1.f, 1.f), *default_material);
+	box->createShape(PxBoxGeometry(.5f, .5f, .5f), *default_material);
 	//update the mass of the box
 	PxRigidBodyExt::updateMassAndInertia(*box, 1.f); //density of 1kg/m^3
 	scene->addActor(*box);
 	PxReal mass = box->getMass();
 	cout << "Mass=" << mass << endl;
+	box->addForce(force);
 }
 
 /// Perform a single simulation step
@@ -118,7 +120,6 @@ int main()
 
 	//initialise the scene
 	InitScene();
-
 	//set the simulation step to 1/60th of a second
 	PxReal delta_time = 1.f/60.f;
 
@@ -128,11 +129,12 @@ int main()
 		//'visualise' position and velocity of the box
 		PxVec3 position = box->getGlobalPose().p;
 		PxVec3 velocity = box->getLinearVelocity();
+		
 		cout << setiosflags(ios::fixed) << setprecision(2) << "x=" << position.x << 
 			", y=" << position.y << ", z=" << position.z << ",  ";
 		cout << setiosflags(ios::fixed) << setprecision(2) << "vx=" << velocity.x << 
 			", vy=" << velocity.y << ", vz=" << velocity.z << endl;
-
+		
 		//perform a single simulation step
 		Update(delta_time);
 		
