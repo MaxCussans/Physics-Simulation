@@ -123,6 +123,7 @@ namespace PhysicsEngine
 		}
 	};
 
+	//compound object class to create two boxes of size 1x1x1
 	class CompoundObject : public DynamicActor
 	{
 	public:
@@ -131,7 +132,6 @@ namespace PhysicsEngine
 		{
 			CreateShape(PxBoxGeometry(dimensions), density);
 			CreateShape(PxBoxGeometry(dimensions), density);
-			GetShape(1)->setLocalPose(PxTransform(PxVec3(1.f, .0f, .0f)));
 		}
 	};
 }

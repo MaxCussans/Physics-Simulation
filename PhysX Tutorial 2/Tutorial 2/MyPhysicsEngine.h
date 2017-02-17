@@ -40,6 +40,7 @@ namespace PhysicsEngine
 	class MyScene : public Scene
 	{
 		Plane* plane;
+		//initialise compound object
 		CompoundObject* obj;
 
 	public:
@@ -62,9 +63,11 @@ namespace PhysicsEngine
 			plane = new Plane();
 			plane->Color(PxVec3(210.f/255.f,210.f/255.f,210.f/255.f));
 			Add(plane);
-
+			//create compound object
 			obj = new CompoundObject(PxTransform(PxVec3(.0f,10.f,.0f)));
-			obj->Color(color_palette[0]);
+			obj->GetShape(0)->setLocalPose(PxTransform(PxVec3(.5f, .0f, .0f)));
+			obj->GetShape(1)->setLocalPose(PxTransform(PxVec3(-.5f, .0f, .0f)));
+			obj->Color(color_palette[3]);
 			Add(obj);
 		}
 
