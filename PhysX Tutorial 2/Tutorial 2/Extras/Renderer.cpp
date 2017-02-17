@@ -309,7 +309,7 @@ namespace VisualDebugger
 						//move the plane slightly down to avoid visual artefacts
 						if (h.getType() == PxGeometryType::ePLANE)
 						{
-							pose.q *= PxQuat(PxHalfPi, PxVec3(0.f, 0.f, 1.f));
+							pose.q *= PxQuat(PxHalfPi, PxVec3(0.f, .0f, 1.f));
 							pose.p += PxVec3(0,-0.01,0);
 						}
 

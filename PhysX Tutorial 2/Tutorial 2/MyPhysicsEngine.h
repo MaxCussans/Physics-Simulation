@@ -74,6 +74,10 @@ namespace PhysicsEngine
 		//Custom udpate function
 		virtual void CustomUpdate() 
 		{
+			//rotate 45 degrees every update
+			PxTransform pose = ((PxRigidBody*)obj->Get())->getGlobalPose();
+			pose.q *= PxQuat(PxHalfPi / 2, PxVec3(.0f, 1.f, .0f));
+			((PxRigidBody*)obj->Get())->setGlobalPose(pose);
 		}
 	};
 }

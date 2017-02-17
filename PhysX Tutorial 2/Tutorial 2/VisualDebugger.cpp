@@ -130,7 +130,6 @@ namespace VisualDebugger
 	{
 		//handle pressed keys
 		KeyHold();
-
 		//start rendering
 		Renderer::Start(camera->getEye(), camera->getDir());
 
