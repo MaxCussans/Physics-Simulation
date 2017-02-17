@@ -65,8 +65,8 @@ namespace PhysicsEngine
 			//create compound object
 			obj = new CompoundObject(PxTransform(PxVec3(.0f,10.f,.0f)));
 			//angle in degrees
-			obj->GetShape(0)->setLocalPose(PxTransform(PxVec3(.5f, .0f, .0f), PxQuat(radConv(45), PxVec3(0.f, 1.f, 0.f))));
-			obj->GetShape(1)->setLocalPose(PxTransform(PxVec3(-.5f, .0f, .0f)));
+			obj->GetShape(0)->setLocalPose(PxTransform(PxVec3(.5f, .0f, .0f), PxQuat(radConv(45), PxVec3(0.f, 1.f, 1.f))));
+			obj->GetShape(1)->setLocalPose(PxTransform(PxVec3(-.5f, .0f, .0f), PxQuat(radConv(45), PxVec3(0.f, 1.f, 0.f))));
 			obj->Color(color_palette[3]);
 			Add(obj);
 		}
