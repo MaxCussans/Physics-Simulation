@@ -40,7 +40,7 @@ namespace PhysicsEngine
 	class MyScene : public Scene
 	{
 		Plane* plane;
-		Box* box;
+		CompoundObject* obj;
 
 	public:
 		///A custom scene class
@@ -48,6 +48,8 @@ namespace PhysicsEngine
 		{
 			px_scene->setVisualizationParameter(PxVisualizationParameter::eSCALE, 1.0f);
 			px_scene->setVisualizationParameter(PxVisualizationParameter::eCOLLISION_SHAPES, 1.0f);
+			px_scene->setVisualizationParameter(PxVisualizationParameter::eACTOR_AXES, 1.0f);
+			px_scene->setVisualizationParameter(PxVisualizationParameter::eBODY_LIN_VELOCITY, 1.0f);
 		}
 
 		//Custom scene initialisation
@@ -61,9 +63,9 @@ namespace PhysicsEngine
 			plane->Color(PxVec3(210.f/255.f,210.f/255.f,210.f/255.f));
 			Add(plane);
 
-			box = new Box(PxTransform(PxVec3(.0f,10.f,.0f)));
-			box->Color(color_palette[0]);
-			Add(box);
+			obj = new CompoundObject(PxTransform(PxVec3(.0f,10.f,.0f)));
+			obj->Color(color_palette[0]);
+			Add(obj);
 		}
 
 		//Custom udpate function
