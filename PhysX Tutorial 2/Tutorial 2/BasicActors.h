@@ -6,6 +6,13 @@
 
 namespace PhysicsEngine
 {
+	static PxReal radConv(PxReal deg)
+	{
+		PxReal rad;
+		rad = (deg * PxPi) / 180;
+		return rad;
+	}
+
 	///Plane class
 	class Plane : public StaticActor
 	{
@@ -134,4 +141,6 @@ namespace PhysicsEngine
 			CreateShape(PxBoxGeometry(dimensions), density);
 		}
 	};
+
+	
 }

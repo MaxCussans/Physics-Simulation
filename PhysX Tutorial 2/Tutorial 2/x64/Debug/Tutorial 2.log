@@ -1,3 +1,9 @@
-﻿  VisualDebugger.cpp
+﻿  Tutorial 2.cpp
+  VisualDebugger.cpp
+  PhysicsEngine.cpp
+  Renderer.cpp
+  GLFontRenderer.cpp
+  Camera.cpp
+  Generating Code...
   Tutorial 2.vcxproj -> C:\Users\Computing\Documents\GitHub\Physics-Simulation\PhysX Tutorial 2\x64\Debug\Tutorial 2.exe
   Tutorial 2.vcxproj -> C:\Users\Computing\Documents\GitHub\Physics-Simulation\PhysX Tutorial 2\x64\Debug\Tutorial 2.pdb (Partial PDB)
