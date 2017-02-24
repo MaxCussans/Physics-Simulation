@@ -14,6 +14,7 @@ namespace PhysicsEngine
 
 	//pyramid vertices
 	static PxVec3 pyramid_verts[] = {PxVec3(0,1,0), PxVec3(1,0,0), PxVec3(-1,0,0), PxVec3(0,0,1), PxVec3(0,0,-1)};
+	static PxVec3 wedge_verts[] = { PxVec3(0,0,0), PxVec3(1,1,0), PxVec3(1, 0 ,0), PxVec3(0,0,1), PxVec3(1,1,1), PxVec3(1,0,1) };
 	//pyramid triangles: a list of three vertices for each triangle e.g. the first triangle consists of vertices 1, 4 and 0
 	//vertices have to be specified in a counter-clockwise order to assure the correct shading in rendering
 	static PxU32 pyramid_trigs[] = {1, 4, 0, 3, 1, 0, 2, 3, 0, 4, 2, 0, 3, 2, 1, 2, 4, 1};
@@ -36,6 +37,15 @@ namespace PhysicsEngine
 		}
 	};
 
+	class TriangleWedge : public ConvexMesh
+	{
+	public:
+		TriangleWedge(PxTransform pose = PxTransform(PxIdentity), PxReal density = 1.f) :
+			ConvexMesh(vector<PxVec3>(begin(wedge_verts), end(wedge_verts)), pose, density)
+		{
+		}
+	};
+
 	///Custom scene class
 	class MyScene : public Scene
 	{
@@ -43,7 +53,7 @@ namespace PhysicsEngine
 		//initialise compound object
 		RectangleEnclosure* obj;
 		Box* box;
-		Pyramid* pyramid;
+		TriangleWedge* pyramid;
 	public:
 		///A custom scene class
 		void SetVisualisation()
@@ -75,7 +85,7 @@ namespace PhysicsEngine
 			//add box
 			box = new Box(PxTransform(PxVec3(.0f, 20.f, .0f)));
 			box->Color(color_palette[4]);
-			pyramid = new Pyramid(PxTransform(PxVec3(.0f, 3.f, .0f)));
+			pyramid = new TriangleWedge(PxTransform(PxVec3(.0f, 3.f, .0f)));
 			pyramid->Color(color_palette[5]);
 			Add(pyramid);
 			Add(box);
