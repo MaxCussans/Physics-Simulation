@@ -42,6 +42,8 @@ namespace PhysicsEngine
 		Plane* plane;
 		//initialise compound object
 		RectangleEnclosure* obj;
+		Box* box;
+		Pyramid* pyramid;
 	public:
 		///A custom scene class
 		void SetVisualisation()
@@ -65,12 +67,20 @@ namespace PhysicsEngine
 			//create compound object
 			obj = new RectangleEnclosure(PxTransform(PxVec3(.0f,10.f,.0f)));
 			//angle in degrees
-			obj->GetShape(0)->setLocalPose(PxTransform(PxVec3(0.f, 0.f, .9f), PxQuat(radConv(90), PxVec3(1.f, 1.f, 0.f))));
+			obj->GetShape(0)->setLocalPose(PxTransform(PxVec3(0.f, 0.f, .9f), PxQuat(radConv(90), PxVec3(1.f, 0.f, 0.f))));
 			obj->GetShape(1)->setLocalPose(PxTransform(PxVec3(0.f, .0f, -.9f), PxQuat(radConv(90), PxVec3(1.f, 0.f, 0.f))));
 			obj->GetShape(2)->setLocalPose(PxTransform(PxVec3(1.f, .0f, .0f)));
 			obj->GetShape(3)->setLocalPose(PxTransform(PxVec3(-1.f, .0f, .0f)));
 			obj->Color(color_palette[3]);
+			//add box
+			box = new Box(PxTransform(PxVec3(.0f, 20.f, .0f)));
+			box->Color(color_palette[4]);
+			pyramid = new Pyramid(PxTransform(PxVec3(.0f, 3.f, .0f)));
+			pyramid->Color(color_palette[5]);
+			Add(pyramid);
+			Add(box);
 			Add(obj);
+
 		}
 
 		//Custom udpate function

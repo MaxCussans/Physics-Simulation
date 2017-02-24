@@ -47,11 +47,12 @@ namespace PhysicsEngine
 		// - pose in 0,0,0
 		// - dimensions: 1m
 		// - denisty: 1kg/m^3
+		//thickness = y value of dimensions
 		RectangleEnclosure(const PxTransform& pose = PxTransform(PxIdentity), PxVec3 dimensions = PxVec3(1.f, .1f, .3f), PxReal density = 1.f)
 			: DynamicActor(pose)
 		{
-			CreateShape(PxBoxGeometry(dimensions), density);
-			CreateShape(PxBoxGeometry(dimensions), density);
+			CreateShape(PxBoxGeometry(dimensions.x, dimensions.y, dimensions.z), density);
+			CreateShape(PxBoxGeometry(dimensions.x, dimensions.y, dimensions.z), density);
 			CreateShape(PxBoxGeometry(dimensions.y, dimensions.z, dimensions.x), density);
 			CreateShape(PxBoxGeometry(dimensions.y, dimensions.z, dimensions.x), density);
 		}
@@ -65,7 +66,7 @@ namespace PhysicsEngine
 		// - pose in 0,0,0
 		// - dimensions: 1m x 1m x 1m
 		// - denisty: 1kg/m^3
-		Box(const PxTransform& pose=PxTransform(PxIdentity), PxVec3 dimensions=PxVec3(.5f,.5f,.5f), PxReal density=1.f) 
+		Box(const PxTransform& pose=PxTransform(PxIdentity), PxVec3 dimensions=PxVec3(.3f,.3f,.3f), PxReal density=1.f) 
 			: DynamicActor(pose)
 		{ 
 			CreateShape(PxBoxGeometry(dimensions), density);
