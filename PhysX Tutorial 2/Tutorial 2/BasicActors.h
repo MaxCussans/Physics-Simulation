@@ -40,6 +40,23 @@ namespace PhysicsEngine
 		}
 	};
 
+	class RectangleEnclosure : public DynamicActor
+	{
+	public:
+		//a sphere with default parameters:
+		// - pose in 0,0,0
+		// - dimensions: 1m
+		// - denisty: 1kg/m^3
+		RectangleEnclosure(const PxTransform& pose = PxTransform(PxIdentity), PxVec3 dimensions = PxVec3(1.f, .1f, .3f), PxReal density = 1.f)
+			: DynamicActor(pose)
+		{
+			CreateShape(PxBoxGeometry(dimensions), density);
+			CreateShape(PxBoxGeometry(dimensions), density);
+			CreateShape(PxBoxGeometry(dimensions.y, dimensions.z, dimensions.x), density);
+			CreateShape(PxBoxGeometry(dimensions.y, dimensions.z, dimensions.x), density);
+		}
+	};
+
 	///Box class
 	class Box : public DynamicActor
 	{

@@ -41,7 +41,7 @@ namespace PhysicsEngine
 	{
 		Plane* plane;
 		//initialise compound object
-		CompoundObject* obj;
+		RectangleEnclosure* obj;
 	public:
 		///A custom scene class
 		void SetVisualisation()
@@ -63,12 +63,12 @@ namespace PhysicsEngine
 			plane->Color(PxVec3(210.f/255.f,210.f/255.f,210.f/255.f));
 			Add(plane);
 			//create compound object
-			obj = new CompoundObject(PxTransform(PxVec3(.0f,10.f,.0f)));
+			obj = new RectangleEnclosure(PxTransform(PxVec3(.0f,10.f,.0f)));
 			//angle in degrees
-			obj->GetShape(0)->setLocalPose(PxTransform(PxVec3(.0f, .0f, .0f), PxQuat(radConv(90), PxVec3(0.f, 1.f, 0.f))));
-			obj->GetShape(1)->setLocalPose(PxTransform(PxVec3(.0f, .0f, .0f), PxQuat(radConv(90), PxVec3(0.f, 0.f, 1.f))));
-			obj->GetShape(2)->setLocalPose(PxTransform(PxVec3(.0f, .0f, .0f), PxQuat(radConv(45), PxVec3(1.f, 0.f, 0.f))));
-			obj->GetShape(3)->setLocalPose(PxTransform(PxVec3(.0f, .0f, .0f), PxQuat(radConv(45), PxVec3(0.f, 1.f, 0.f))));
+			obj->GetShape(0)->setLocalPose(PxTransform(PxVec3(0.f, 0.f, .9f), PxQuat(radConv(90), PxVec3(1.f, 1.f, 0.f))));
+			obj->GetShape(1)->setLocalPose(PxTransform(PxVec3(0.f, .0f, -.9f), PxQuat(radConv(90), PxVec3(1.f, 0.f, 0.f))));
+			obj->GetShape(2)->setLocalPose(PxTransform(PxVec3(1.f, .0f, .0f)));
+			obj->GetShape(3)->setLocalPose(PxTransform(PxVec3(-1.f, .0f, .0f)));
 			obj->Color(color_palette[3]);
 			Add(obj);
 		}
