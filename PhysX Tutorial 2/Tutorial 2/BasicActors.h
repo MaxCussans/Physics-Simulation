@@ -137,8 +137,10 @@ namespace PhysicsEngine
 		CompoundObject(const PxTransform& pose = PxTransform(PxIdentity), PxVec3 dimensions = PxVec3(1.f, 1.f, 1.f), PxReal density = 1.f)
 			: DynamicActor(pose)
 		{
-			CreateShape(PxBoxGeometry(dimensions), density);
-			CreateShape(PxBoxGeometry(dimensions), density);
+			CreateShape(PxCapsuleGeometry(dimensions.x * 5, dimensions.y), density);
+			CreateShape(PxCapsuleGeometry(dimensions.x, dimensions.y), density);
+			CreateShape(PxCapsuleGeometry(dimensions.x, dimensions.y), density);
+			CreateShape(PxCapsuleGeometry(dimensions.x, dimensions.y), density);
 		}
 	};
 
