@@ -33,7 +33,7 @@ namespace PhysicsEngine
 		// - pose in 0,0,0
 		// - dimensions: 1m
 		// - denisty: 1kg/m^3
-		Sphere(const PxTransform& pose=PxTransform(PxIdentity), PxReal radius=1.f, PxReal density=1.f) 
+		Sphere(const PxTransform& pose=PxTransform(PxIdentity), PxReal radius=.1f, PxReal density=1.f) 
 			: DynamicActor(pose)
 		{ 
 			CreateShape(PxSphereGeometry(radius), density);
@@ -48,7 +48,7 @@ namespace PhysicsEngine
 		// - dimensions: 1m
 		// - denisty: 1kg/m^3
 		//thickness = y value of dimensions
-		RectangleEnclosure(const PxTransform& pose = PxTransform(PxIdentity), PxVec3 dimensions = PxVec3(1.f, .1f, .3f), PxReal density = 1.f)
+		RectangleEnclosure(const PxTransform& pose = PxTransform(PxIdentity), PxVec3 dimensions = PxVec3(10.f, .1f, .5f), PxReal density = 1.f)
 			: DynamicActor(pose)
 		{
 			CreateShape(PxBoxGeometry(dimensions.x, dimensions.y, dimensions.z), density);
