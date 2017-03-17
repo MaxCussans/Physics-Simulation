@@ -51,8 +51,8 @@ namespace PhysicsEngine
 		RectangleEnclosure(const PxTransform& pose = PxTransform(PxIdentity), PxVec3 dimensions = PxVec3(10.f, .1f, .9f), PxReal density = 1.f)
 			: DynamicActor(pose)
 		{
-			CreateShape(PxBoxGeometry(dimensions.x, dimensions.y, dimensions.z), density);
-			CreateShape(PxBoxGeometry(dimensions.x, dimensions.y, dimensions.z), density);
+			CreateShape(PxBoxGeometry(dimensions.x / 2, dimensions.y, dimensions.z), density);
+			CreateShape(PxBoxGeometry(dimensions.x / 2, dimensions.y, dimensions.z), density);
 			CreateShape(PxBoxGeometry(dimensions.y, dimensions.z, dimensions.x), density);
 			CreateShape(PxBoxGeometry(dimensions.y, dimensions.z, dimensions.x), density);
 		}
