@@ -17,7 +17,7 @@ namespace PhysicsEngine
 	//pyramid vertices
 	static PxVec3 pyramid_verts[] = {PxVec3(0,1,0), PxVec3(1,0,0), PxVec3(-1,0,0), PxVec3(0,0,1), PxVec3(0,0,-1)};
 	static PxVec3 wedge_verts[] = { PxVec3(-6.2,0,-wedgel), PxVec3(-6.2,0,wedgel), PxVec3(-6.2,wedgeh,wedgel), PxVec3(6.2,0, -wedgel), PxVec3(6.2,0,wedgel), PxVec3(6.2,wedgeh,wedgel) };
-	static PxVec3 flipper_verts[] = { PxVec3(-.5, 0, -1.5), PxVec3(-.5, 0, 1.5), PxVec3(-.5, 1, 1.5), PxVec3(.5, 0 , -1.5), PxVec3(.5, 0, 1.5), PxVec3(.5, 1, 1.5) };
+	static PxVec3 flipper_verts[] = { PxVec3(-.1, 0, -0.75), PxVec3(-.1, 0, 0.75), PxVec3(-.1, 0.2, 0.75), PxVec3(.1, 0 , -0.75), PxVec3(.1, 0, 0.75), PxVec3(.1, 0.2, 0.75) };
 	static PxVec3 hex_verts[] = { PxVec3(0,0,0), PxVec3(-1,1,0), PxVec3(-1, (1+ sqrt(2)) ,0), PxVec3(0,(2 + sqrt(2)),0), PxVec3((sqrt(2)),(2 + sqrt(2)),0), PxVec3(sqrt(2)+ 1, 1 + sqrt(2),0), PxVec3((sqrt(2) + 1), 1 ,0), PxVec3(sqrt(2), 0, 0),
 		PxVec3(0,0,1), PxVec3(-1,1,1), PxVec3(-1, (1 + sqrt(2)) ,1), PxVec3(0,(2 + sqrt(2)),1), PxVec3((sqrt(2)),(2 + sqrt(2)),1), PxVec3(sqrt(2) + 1,1 + sqrt(2),1), PxVec3(sqrt(2) + 1, 1 ,1), PxVec3(sqrt(2), 0, 1) };
 	//pyramid triangles: a list of three vertices for each triangle e.g. the first triangle consists of vertices 1, 4 and 0
@@ -117,7 +117,7 @@ namespace PhysicsEngine
 			//hex = new Hexagon(PxTransform(PxVec3(.0f, 3.f, .0f)));
 			//hex->Color(color_palette[5]);
 
-			flipper = new FlipperWedge(PxTransform(PxVec3(.0f, 5.f, 0.f), PxQuat(radConv(90), PxVec3(1.f, 0.f, 0.f))));
+			flipper = new FlipperWedge(PxTransform(PxVec3(.0f, 4.f, -2.f), PxQuat(radConv(90), PxVec3(1.f, 0.f, 0.f))));
 			slope = new TriangleWedge(PxTransform(PxVec3(.0f, .0f, .0f)));
 			slope->SetKinematic(true);
 			slope->Color(color_palette[4]);

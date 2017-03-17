@@ -1,6 +1,7 @@
 ﻿  Tutorial 2.cpp
 c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(19): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
 c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(19): warning C4244: 'argument': conversion from 'const int' to 'physx::PxReal', possible loss of data
+c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(20): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
 c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(21): warning C4244: 'argument': conversion from 'double' to 'physx::PxReal', possible loss of data
 c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(22): warning C4244: 'argument': conversion from 'double' to 'physx::PxReal', possible loss of data
   Generating Code...
@@ -8,6 +9,7 @@ c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial
   VisualDebugger.cpp
 c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(19): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
 c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(19): warning C4244: 'argument': conversion from 'const int' to 'physx::PxReal', possible loss of data
+c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(20): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
 c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(21): warning C4244: 'argument': conversion from 'double' to 'physx::PxReal', possible loss of data
 c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(22): warning C4244: 'argument': conversion from 'double' to 'physx::PxReal', possible loss of data
   Generating Code...
