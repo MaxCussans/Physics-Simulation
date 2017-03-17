@@ -11,10 +11,12 @@ namespace PhysicsEngine
 	//a list of colours: Circus Palette
 	static const PxVec3 color_palette[] = {PxVec3(46.f/255.f,9.f/255.f,39.f/255.f),PxVec3(217.f/255.f,0.f/255.f,0.f/255.f),
 		PxVec3(255.f/255.f,45.f/255.f,0.f/255.f),PxVec3(255.f/255.f,140.f/255.f,54.f/255.f),PxVec3(4.f/255.f,117.f/255.f,111.f/255.f)};
+	const int wedgeh = 8;
+	const int wedgel = 12;
 
 	//pyramid vertices
 	static PxVec3 pyramid_verts[] = {PxVec3(0,1,0), PxVec3(1,0,0), PxVec3(-1,0,0), PxVec3(0,0,1), PxVec3(0,0,-1)};
-	static PxVec3 wedge_verts[] = { PxVec3(-5.2,0,-12), PxVec3(-5.2,0,12), PxVec3(-5.2,5,12), PxVec3(5.2,0, -12), PxVec3(5.2,0,12), PxVec3(5.2,5,12) };
+	static PxVec3 wedge_verts[] = { PxVec3(-6.2,0,-wedgel), PxVec3(-6.2,0,wedgel), PxVec3(-6.2,wedgeh,wedgel), PxVec3(6.2,0, -wedgel), PxVec3(6.2,0,wedgel), PxVec3(6.2,wedgeh,wedgel) };
 	static PxVec3 hex_verts[] = { PxVec3(0,0,0), PxVec3(-1,1,0), PxVec3(-1, (1+ sqrt(2)) ,0), PxVec3(0,(2 + sqrt(2)),0), PxVec3((sqrt(2)),(2 + sqrt(2)),0), PxVec3(sqrt(2)+ 1, 1 + sqrt(2),0), PxVec3((sqrt(2) + 1), 1 ,0), PxVec3(sqrt(2), 0, 0),
 		PxVec3(0,0,1), PxVec3(-1,1,1), PxVec3(-1, (1 + sqrt(2)) ,1), PxVec3(0,(2 + sqrt(2)),1), PxVec3((sqrt(2)),(2 + sqrt(2)),1), PxVec3(sqrt(2) + 1,1 + sqrt(2),1), PxVec3(sqrt(2) + 1, 1 ,1), PxVec3(sqrt(2), 0, 1) };
 	//pyramid triangles: a list of three vertices for each triangle e.g. the first triangle consists of vertices 1, 4 and 0
@@ -89,12 +91,17 @@ namespace PhysicsEngine
 			plane->Color(PxVec3(210.f/255.f,210.f/255.f,210.f/255.f));
 			Add(plane);
 			//create compound object
-			obj = new RectangleEnclosure(PxTransform(PxVec3(.0f,.9f,.0f)));
+			obj = new RectangleEnclosure(PxTransform(PxVec3(.0f, 0.f,2.f), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f,0.f))));
+			obj->SetKinematic(true);
 			//angle in degrees
-			obj->GetShape(0)->setLocalPose(PxTransform(PxVec3(0.f, 5.f, 9.9f), PxQuat(radConv(90), PxVec3(1.f, 0.f, 0.f))));
-			obj->GetShape(1)->setLocalPose(PxTransform(PxVec3(0.f, 5.f, -9.9f), PxQuat(radConv(90), PxVec3(1.f, 0.f, 0.f))));
-			obj->GetShape(2)->setLocalPose(PxTransform(PxVec3(5.f, 5.f, .0f), PxQuat(radConv(90), PxVec3(0.f, 1.f, 0.f))));
-			obj->GetShape(3)->setLocalPose(PxTransform(PxVec3(-5.f, 5.f, .0f), PxQuat(radConv(90), PxVec3(0.f, 1.f, 0.f))));
+			obj->GetShape(0)->setLocalPose(PxTransform(PxVec3(0.f, 5.2f, 11.9f), PxQuat(radConv(90), PxVec3(1.f, 0.f, 0.f))));
+			obj->GetShape(1)->setLocalPose(PxTransform(PxVec3(0.f, 5.2f, -11.9f), PxQuat(radConv(90), PxVec3(1.f, 0.f, 0.f))));
+			obj->GetShape(2)->setLocalPose(PxTransform(PxVec3(6.f, 5.2f, .0f)));
+			obj->GetShape(3)->setLocalPose(PxTransform(PxVec3(-6.f, 5.2f, .0f)));
+
+			
+			
+			
 
 			obj->Color(color_palette[5]);
 			//add box
@@ -102,7 +109,8 @@ namespace PhysicsEngine
 			//box->Color(color_palette[4]);
 			//hex = new Hexagon(PxTransform(PxVec3(.0f, 3.f, .0f)));
 			//hex->Color(color_palette[5]);
-			slope = new TriangleWedge(PxTransform(PxVec3(.0f, .7f, .0f)));
+			slope = new TriangleWedge(PxTransform(PxVec3(.0f, .0f, .0f)));
+			slope->SetKinematic(true);
 			slope->Color(color_palette[4]);
 			ball = new Sphere(PxTransform(PxVec3(0.f, 5.f, 0.f)));
 			ball->Color(color_palette[2]);

@@ -1,13 +1,15 @@
 ﻿  Tutorial 2.cpp
-c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(17): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
-c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(18): warning C4244: 'argument': conversion from 'double' to 'physx::PxReal', possible loss of data
-c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(19): warning C4244: 'argument': conversion from 'double' to 'physx::PxReal', possible loss of data
+c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(19): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
+c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(19): warning C4244: 'argument': conversion from 'const int' to 'physx::PxReal', possible loss of data
+c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(20): warning C4244: 'argument': conversion from 'double' to 'physx::PxReal', possible loss of data
+c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(21): warning C4244: 'argument': conversion from 'double' to 'physx::PxReal', possible loss of data
   Generating Code...
   Compiling...
   VisualDebugger.cpp
-c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(17): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
-c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(18): warning C4244: 'argument': conversion from 'double' to 'physx::PxReal', possible loss of data
-c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(19): warning C4244: 'argument': conversion from 'double' to 'physx::PxReal', possible loss of data
+c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(19): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
+c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(19): warning C4244: 'argument': conversion from 'const int' to 'physx::PxReal', possible loss of data
+c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(20): warning C4244: 'argument': conversion from 'double' to 'physx::PxReal', possible loss of data
+c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(21): warning C4244: 'argument': conversion from 'double' to 'physx::PxReal', possible loss of data
   Generating Code...
   Tutorial 2.vcxproj -> C:\Users\Computing\Documents\GitHub\Physics-Simulation\PhysX Tutorial 2\x64\Debug\Tutorial 2.exe
   Tutorial 2.vcxproj -> C:\Users\Computing\Documents\GitHub\Physics-Simulation\PhysX Tutorial 2\x64\Debug\Tutorial 2.pdb (Partial PDB)

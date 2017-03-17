@@ -60,7 +60,8 @@ namespace VisualDebugger
 		Renderer::InitWindow(window_name, width, height);
 		Renderer::Init();
 
-		camera = new Camera(PxVec3(0.0f, 5.0f, -15.0f), PxVec3(0.f, .1f, 1.f), 5.f);
+		//camera starting position
+		camera = new Camera(PxVec3(0.0f, 20.f, -20.f), PxVec3(0.f, -1.f, 1.f), 5.f);
 
 		//initialise HUD
 		HUDInit();
@@ -89,30 +90,30 @@ namespace VisualDebugger
 	{
 		//initialise HUD
 		//add an empty screen
-		hud.AddLine(EMPTY, "");
+		//hud.AddLine(EMPTY, "");
 		//add a help screen
-		hud.AddLine(HELP, " Simulation");
-		hud.AddLine(HELP, "    F9 - select next actor");
-		hud.AddLine(HELP, "    F10 - pause");
-		hud.AddLine(HELP, "    F12 - reset");
-		hud.AddLine(HELP, "");
-		hud.AddLine(HELP, " Display");
-		hud.AddLine(HELP, "    F5 - help on/off");
-		hud.AddLine(HELP, "    F6 - shadows on/off");
-		hud.AddLine(HELP, "    F7 - render mode");
-		hud.AddLine(HELP, "");
-		hud.AddLine(HELP, " Camera");
-		hud.AddLine(HELP, "    W,S,A,D,Q,Z - forward,backward,left,right,up,down");
-		hud.AddLine(HELP, "    mouse + click - change orientation");
-		hud.AddLine(HELP, "    F8 - reset view");
-		hud.AddLine(HELP, "");
-		hud.AddLine(HELP, " Force (applied to the selected actor)");
-		hud.AddLine(HELP, "    I,K,J,L,U,M - forward,backward,left,right,up,down");
-		//add a pause screen
-		hud.AddLine(PAUSE, "");
-		hud.AddLine(PAUSE, "");
-		hud.AddLine(PAUSE, "");
-		hud.AddLine(PAUSE, "   Simulation paused. Press F10 to continue.");
+		//hud.AddLine(HELP, " Simulation");
+	//hud.AddLine(HELP, "    F9 - select next actor");
+	//hud.AddLine(HELP, "    F10 - pause");
+	//hud.AddLine(HELP, "    F12 - reset");
+	//hud.AddLine(HELP, "");
+	//hud.AddLine(HELP, " Display");
+	//hud.AddLine(HELP, "    F5 - help on/off");
+	//hud.AddLine(HELP, "    F6 - shadows on/off");
+	//hud.AddLine(HELP, "    F7 - render mode");
+	//hud.AddLine(HELP, "");
+	//hud.AddLine(HELP, " Camera");
+	//hud.AddLine(HELP, "    W,S,A,D,Q,Z - forward,backward,left,right,up,down");
+	//hud.AddLine(HELP, "    mouse + click - change orientation");
+	//hud.AddLine(HELP, "    F8 - reset view");
+	//hud.AddLine(HELP, "");
+	//hud.AddLine(HELP, " Force (applied to the selected actor)");
+	//hud.AddLine(HELP, "    I,K,J,L,U,M - forward,backward,left,right,up,down");
+	////add a pause screen
+	//hud.AddLine(PAUSE, "");
+	//hud.AddLine(PAUSE, "");
+	//hud.AddLine(PAUSE, "");
+	//hud.AddLine(PAUSE, "   Simulation paused. Press F10 to continue.");
 		//set font size for all screens
 		hud.FontSize(0.018f);
 		//set font color for all screens
