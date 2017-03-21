@@ -68,6 +68,17 @@ namespace PhysicsEngine
 		{
 		}
 	};
+	
+	static PxVec3 angularTranslate(PxReal x, PxReal z)
+	{
+		//angle of board
+		float tans = 8.0f / (24.0f);
+		float angle = atan(tans);
+		//the distance to move down
+		PxReal y = 4.0f + (z * tan(angle));
+		PxVec3 coords(x, y, z);
+		return coords;
+	}
 
 	///Custom scene class
 	class MyScene : public Scene
@@ -117,7 +128,8 @@ namespace PhysicsEngine
 			//hex = new Hexagon(PxTransform(PxVec3(.0f, 3.f, .0f)));
 			//hex->Color(color_palette[5]);
 
-			flipper = new FlipperWedge(PxTransform(PxVec3(.0f, 4.f, -2.f), PxQuat(radConv(90), PxVec3(1.f, 0.f, 0.f))));
+			flipper = new FlipperWedge(PxTransform(angularTranslate(-2, -5), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f))));
+			flipper->SetKinematic(true);
 			slope = new TriangleWedge(PxTransform(PxVec3(.0f, .0f, .0f)));
 			slope->SetKinematic(true);
 			slope->Color(color_palette[4]);
