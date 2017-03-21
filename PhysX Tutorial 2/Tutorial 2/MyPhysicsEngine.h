@@ -74,7 +74,7 @@ namespace PhysicsEngine
 		//angle of board
 		float tans = 8.0f / (24.0f);
 		float angle = atan(tans);
-		//the distance to move down
+		//the distance to move down using the height at 0
 		PxReal y = 4.0f + (z * tan(angle));
 		PxVec3 coords(x, y, z);
 		return coords;
@@ -91,6 +91,7 @@ namespace PhysicsEngine
 		TriangleWedge* slope;
 		Sphere* ball;
 		FlipperWedge* flipper;
+		PxParticleSystem *ps;
 
 	public:
 		///A custom scene class
@@ -127,9 +128,32 @@ namespace PhysicsEngine
 			//box->Color(color_palette[4]);
 			//hex = new Hexagon(PxTransform(PxVec3(.0f, 3.f, .0f)));
 			//hex->Color(color_palette[5]);
+			// particles
+			//ps = GetPhysics()->createParticleSystem(50, false);
+			////this->px_scene->addActor(*ps);
+			//PxU32 parts[50];
+			//PxVec3 positions[50];
+			//PxVec3 velocities[50];
+			//PxParticleCreationData pcd;
+			//pcd.numParticles = 50;	
+			//for (int i = 0; i < 50; i++)
+			//{
+			//	float f = float(i);
+			//	parts[i] = i;
+			//	positions[i] = { f / 2 , 4, 0 + f / 10  };
+			//	velocities[i] = { 0,0,0 };
+			//}
+			//
+			//pcd.indexBuffer = PxStrideIterator<const PxU32>(parts);
+			//pcd.positionBuffer = PxStrideIterator<const PxVec3>(positions);
+			//pcd.velocityBuffer = PxStrideIterator<const PxVec3>(velocities);
+			//ps->createParticles(pcd);
+			//ps->releaseParticles();
+			// end particles
 
-			flipper = new FlipperWedge(PxTransform(angularTranslate(-2, -5), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f))));
+			flipper = new FlipperWedge(PxTransform(angularTranslate(-2, -7), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f))));
 			flipper->SetKinematic(true);
+			flipper->GetShape(0)->setLocalPose(PxTransform(PxVec3(0,0,0), PxQuat(radConv(90), PxVec3(0.f, 0.f, 1.f))));
 			slope = new TriangleWedge(PxTransform(PxVec3(.0f, .0f, .0f)));
 			slope->SetKinematic(true);
 			slope->Color(color_palette[4]);

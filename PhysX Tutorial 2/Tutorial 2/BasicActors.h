@@ -161,6 +161,4 @@ namespace PhysicsEngine
 			CreateShape(PxCapsuleGeometry(dimensions.x, dimensions.y), density);
 		}
 	};
-
-	
 }
