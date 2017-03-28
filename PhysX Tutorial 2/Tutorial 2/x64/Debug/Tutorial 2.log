@@ -1,10 +1,4 @@
-﻿  VisualDebugger.cpp
-c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(19): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
-c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(19): warning C4244: 'argument': conversion from 'const int' to 'physx::PxReal', possible loss of data
-c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(20): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
-c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(21): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
-c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(22): warning C4244: 'argument': conversion from 'double' to 'physx::PxReal', possible loss of data
-c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(23): warning C4244: 'argument': conversion from 'double' to 'physx::PxReal', possible loss of data
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppClean.targets(76,5): warning : The process cannot access the file 'c:\users\computing\documents\github\physics-simulation\physx tutorial 2\x64\debug\tutorial 2.ilk' because it is being used by another process.
   Tutorial 2.cpp
 c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(19): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
 c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(19): warning C4244: 'argument': conversion from 'const int' to 'physx::PxReal', possible loss of data
@@ -12,6 +6,18 @@ c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial
 c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(21): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
 c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(22): warning C4244: 'argument': conversion from 'double' to 'physx::PxReal', possible loss of data
 c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(23): warning C4244: 'argument': conversion from 'double' to 'physx::PxReal', possible loss of data
+  VisualDebugger.cpp
+c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(19): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
+c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(19): warning C4244: 'argument': conversion from 'const int' to 'physx::PxReal', possible loss of data
+c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(20): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
+c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(21): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
+c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(22): warning C4244: 'argument': conversion from 'double' to 'physx::PxReal', possible loss of data
+c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(23): warning C4244: 'argument': conversion from 'double' to 'physx::PxReal', possible loss of data
+  PhysicsEngine.cpp
+  Renderer.cpp
+  GLFontRenderer.cpp
+  Camera.cpp
   Generating Code...
+  LINK : C:\Users\Computing\Documents\GitHub\Physics-Simulation\PhysX Tutorial 2\x64\Debug\Tutorial 2.exe not found or not built by the last incremental link; performing full link
   Tutorial 2.vcxproj -> C:\Users\Computing\Documents\GitHub\Physics-Simulation\PhysX Tutorial 2\x64\Debug\Tutorial 2.exe
   Tutorial 2.vcxproj -> C:\Users\Computing\Documents\GitHub\Physics-Simulation\PhysX Tutorial 2\x64\Debug\Tutorial 2.pdb (Partial PDB)
