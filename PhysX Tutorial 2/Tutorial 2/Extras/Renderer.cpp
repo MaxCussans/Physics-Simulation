@@ -155,7 +155,7 @@ namespace VisualDebugger
 				break;
 			}
 		}
-
+		
 		void RenderCloth(const PxCloth* cloth)
 		{
 			PxClothMeshDesc* mesh_desc = ((UserData*)cloth->userData)->cloth_mesh_desc;

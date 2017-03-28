@@ -104,6 +104,8 @@ namespace PhysicsEngine
 			px_scene->setVisualizationParameter(PxVisualizationParameter::eCOLLISION_SHAPES, 1.0f);
 			px_scene->setVisualizationParameter(PxVisualizationParameter::eACTOR_AXES, 1.0f);
 			px_scene->setVisualizationParameter(PxVisualizationParameter::eBODY_LIN_VELOCITY, 1.0f);
+			px_scene->setVisualizationParameter(PxVisualizationParameter::eJOINT_LOCAL_FRAMES,1.0f);
+			px_scene->setVisualizationParameter(PxVisualizationParameter::eJOINT_LIMITS,1.0f);
 		}
 
 		//Custom scene initialisation
@@ -165,7 +167,7 @@ namespace PhysicsEngine
 			slope->Color(color_palette[4]);
 
 			left = new RevoluteJoint(NULL, PxTransform(angularTranslate(1.3, -6.7)), flipperLeft, PxTransform(PxVec3(1.3f, 2.f, -7.f)));
-			right = new RevoluteJoint(NULL, PxTransform(angularTranslate(-1.3, -6.7)), flipperLeft, PxTransform(PxVec3(-1.3f, 2.f, -7.f)));
+			right = new RevoluteJoint(NULL, PxTransform(angularTranslate(-1.3, -6.7)), flipperRight, PxTransform(PxVec3(-1.3f, 2.f, -7.f)));
 			ball = new Sphere(PxTransform((angularTranslate(-5, 0))));
 			ball->Color(color_palette[2]);
 			

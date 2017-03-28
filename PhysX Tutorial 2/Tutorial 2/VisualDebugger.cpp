@@ -371,6 +371,7 @@ namespace VisualDebugger
 			render_mode = BOTH;
 		else if (render_mode == BOTH)
 			render_mode = NORMAL;
+
 	}
 
 	///exit callback
