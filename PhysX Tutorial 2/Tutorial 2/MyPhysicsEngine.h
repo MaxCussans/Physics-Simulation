@@ -17,7 +17,8 @@ namespace PhysicsEngine
 	//pyramid vertices
 	static PxVec3 pyramid_verts[] = {PxVec3(0,1,0), PxVec3(1,0,0), PxVec3(-1,0,0), PxVec3(0,0,1), PxVec3(0,0,-1)};
 	static PxVec3 wedge_verts[] = { PxVec3(-6.2,0,-wedgel), PxVec3(-6.2,0,wedgel), PxVec3(-6.2,wedgeh,wedgel), PxVec3(6.2,0, -wedgel), PxVec3(6.2,0,wedgel), PxVec3(6.2,wedgeh,wedgel) };
-	static PxVec3 flipper_verts[] = { PxVec3(-.2, 0, -1.5), PxVec3(-.2, 0, 0), PxVec3(-.2, 0.2, 0), PxVec3(0, 0 , -1.5), PxVec3(0, 0, 0), PxVec3(0, 0.2, 0) };
+	static PxVec3 flipperR_verts[] = { PxVec3(-.2, 0, -1.5), PxVec3(-.2, 0, 0), PxVec3(-.2, 0.2, 0), PxVec3(0, 0 , -1.5), PxVec3(0, 0, 0), PxVec3(0, 0.2, 0) };
+	static PxVec3 flipperL_verts[] = { PxVec3(.2, 0, -1.5), PxVec3(.2, 0, 0), PxVec3(.2, 0.2, 0), PxVec3(0, 0 , -1.5), PxVec3(0, 0, 0), PxVec3(0, 0.2, 0) };
 	static PxVec3 hex_verts[] = { PxVec3(0,0,0), PxVec3(-1,1,0), PxVec3(-1, (1+ sqrt(2)) ,0), PxVec3(0,(2 + sqrt(2)),0), PxVec3((sqrt(2)),(2 + sqrt(2)),0), PxVec3(sqrt(2)+ 1, 1 + sqrt(2),0), PxVec3((sqrt(2) + 1), 1 ,0), PxVec3(sqrt(2), 0, 0),
 		PxVec3(0,0,1), PxVec3(-1,1,1), PxVec3(-1, (1 + sqrt(2)) ,1), PxVec3(0,(2 + sqrt(2)),1), PxVec3((sqrt(2)),(2 + sqrt(2)),1), PxVec3(sqrt(2) + 1,1 + sqrt(2),1), PxVec3(sqrt(2) + 1, 1 ,1), PxVec3(sqrt(2), 0, 1) };
 	//pyramid triangles: a list of three vertices for each triangle e.g. the first triangle consists of vertices 1, 4 and 0
@@ -51,11 +52,20 @@ namespace PhysicsEngine
 		}
 	};
 
-	class FlipperWedge : public ConvexMesh
+	class FlipperRWedge : public ConvexMesh
 	{
 	public:
-		FlipperWedge(PxTransform pose = PxTransform(PxIdentity), PxReal density = 100.f) :
-			ConvexMesh(vector<PxVec3>(begin(flipper_verts), end(flipper_verts)), pose, density)
+		FlipperRWedge(PxTransform pose = PxTransform(PxIdentity), PxReal density = 100.f) :
+			ConvexMesh(vector<PxVec3>(begin(flipperR_verts), end(flipperR_verts)), pose, density)
+		{
+		}
+	};
+
+	class FlipperLWedge : public ConvexMesh
+	{
+	public:
+		FlipperLWedge(PxTransform pose = PxTransform(PxIdentity), PxReal density = 100.f) :
+			ConvexMesh(vector<PxVec3>(begin(flipperL_verts), end(flipperL_verts)), pose, density)
 		{
 		}
 	};
@@ -90,8 +100,8 @@ namespace PhysicsEngine
 		Hexagon* hex;
 		TriangleWedge* slope;
 		Sphere* ball;
-		FlipperWedge* flipperRight;
-		FlipperWedge* flipperLeft;
+		FlipperRWedge* flipperRight;
+		FlipperLWedge* flipperLeft;
 		PxParticleSystem *ps;
 		RevoluteJoint* right;
 		RevoluteJoint* left;
@@ -156,11 +166,11 @@ namespace PhysicsEngine
 			//ps->releaseParticles();
 			// end particles
 
-			flipperRight = new FlipperWedge(PxTransform(angularTranslate(-3.5, -7), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f))));
+			flipperRight = new FlipperRWedge(PxTransform(angularTranslate(-3.5, -7), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f))));
 			//flipperRight->SetKinematic(true);
 			//flipperRight->GetShape(0)->setLocalPose(PxTransform(PxVec3(0,0.1,0), PxQuat(radConv(90), PxVec3(0.f, 0.f, 1.f)) * PxQuat(radConv(-60), PxVec3(1.f, 0.f, 0.f))));
 
-			flipperLeft = new FlipperWedge(PxTransform(angularTranslate(3.5, -7)));
+			flipperLeft = new FlipperLWedge(PxTransform(angularTranslate(3.5, -7), PxQuat(radConv(-90), PxVec3(0.f, 0.f, 1.f))));
 			//flipperLeft->SetKinematic(true);
 			//flipperLeft->GetShape(0)->setLocalPose(PxTransform(PxVec3(0,0.1,0), PxQuat(radConv(-90), PxVec3(0.f, 0.f, 1.f)) * PxQuat(radConv(-60), PxVec3(1.f, 0.f, 0.f))));
 
@@ -176,10 +186,10 @@ namespace PhysicsEngine
 			//Add(hex);
 			//Add(box);  
 			Add(obj);
-			Add(slope);
 			Add(ball);
 			Add(flipperRight);
 			Add(flipperLeft);
+			Add(slope);
 			
 		}
 
