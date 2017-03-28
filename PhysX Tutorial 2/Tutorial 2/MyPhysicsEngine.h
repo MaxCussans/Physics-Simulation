@@ -17,7 +17,7 @@ namespace PhysicsEngine
 	//pyramid vertices
 	static PxVec3 pyramid_verts[] = {PxVec3(0,1,0), PxVec3(1,0,0), PxVec3(-1,0,0), PxVec3(0,0,1), PxVec3(0,0,-1)};
 	static PxVec3 wedge_verts[] = { PxVec3(-6.2,0,-wedgel), PxVec3(-6.2,0,wedgel), PxVec3(-6.2,wedgeh,wedgel), PxVec3(6.2,0, -wedgel), PxVec3(6.2,0,wedgel), PxVec3(6.2,wedgeh,wedgel) };
-	static PxVec3 flipper_verts[] = { PxVec3(-.1, 0, -0.75), PxVec3(-.1, 0, 0.75), PxVec3(-.1, 0.2, 0.75), PxVec3(.1, 0 , -0.75), PxVec3(.1, 0, 0.75), PxVec3(.1, 0.2, 0.75) };
+	static PxVec3 flipper_verts[] = { PxVec3(-.2, 0, -1.5), PxVec3(-.2, 0, 0), PxVec3(-.2, 0.2, 0), PxVec3(0, 0 , -1.5), PxVec3(0, 0, 0), PxVec3(0, 0.2, 0) };
 	static PxVec3 hex_verts[] = { PxVec3(0,0,0), PxVec3(-1,1,0), PxVec3(-1, (1+ sqrt(2)) ,0), PxVec3(0,(2 + sqrt(2)),0), PxVec3((sqrt(2)),(2 + sqrt(2)),0), PxVec3(sqrt(2)+ 1, 1 + sqrt(2),0), PxVec3((sqrt(2) + 1), 1 ,0), PxVec3(sqrt(2), 0, 0),
 		PxVec3(0,0,1), PxVec3(-1,1,1), PxVec3(-1, (1 + sqrt(2)) ,1), PxVec3(0,(2 + sqrt(2)),1), PxVec3((sqrt(2)),(2 + sqrt(2)),1), PxVec3(sqrt(2) + 1,1 + sqrt(2),1), PxVec3(sqrt(2) + 1, 1 ,1), PxVec3(sqrt(2), 0, 1) };
 	//pyramid triangles: a list of three vertices for each triangle e.g. the first triangle consists of vertices 1, 4 and 0
@@ -54,7 +54,7 @@ namespace PhysicsEngine
 	class FlipperWedge : public ConvexMesh
 	{
 	public:
-		FlipperWedge(PxTransform pose = PxTransform(PxIdentity), PxReal density = 1.f) :
+		FlipperWedge(PxTransform pose = PxTransform(PxIdentity), PxReal density = 100.f) :
 			ConvexMesh(vector<PxVec3>(begin(flipper_verts), end(flipper_verts)), pose, density)
 		{
 		}
@@ -156,18 +156,20 @@ namespace PhysicsEngine
 			//ps->releaseParticles();
 			// end particles
 
-			flipperRight = new FlipperWedge(PxTransform(angularTranslate(-1.2, -7), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f))));
-			flipperRight->GetShape(0)->setLocalPose(PxTransform(PxVec3(0,0.1,0), PxQuat(radConv(90), PxVec3(0.f, 0.f, 1.f)) * PxQuat(radConv(-60), PxVec3(1.f, 0.f, 0.f))));
+			flipperRight = new FlipperWedge(PxTransform(angularTranslate(-3.5, -7), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f))));
+			//flipperRight->SetKinematic(true);
+			//flipperRight->GetShape(0)->setLocalPose(PxTransform(PxVec3(0,0.1,0), PxQuat(radConv(90), PxVec3(0.f, 0.f, 1.f)) * PxQuat(radConv(-60), PxVec3(1.f, 0.f, 0.f))));
 
-			flipperLeft = new FlipperWedge(PxTransform(angularTranslate(1.2, -7), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f))));
-			flipperLeft->GetShape(0)->setLocalPose(PxTransform(PxVec3(0,0.1,0), PxQuat(radConv(-90), PxVec3(0.f, 0.f, 1.f)) * PxQuat(radConv(-60), PxVec3(1.f, 0.f, 0.f))));
+			flipperLeft = new FlipperWedge(PxTransform(angularTranslate(3.5, -7)));
+			//flipperLeft->SetKinematic(true);
+			//flipperLeft->GetShape(0)->setLocalPose(PxTransform(PxVec3(0,0.1,0), PxQuat(radConv(-90), PxVec3(0.f, 0.f, 1.f)) * PxQuat(radConv(-60), PxVec3(1.f, 0.f, 0.f))));
 
 			slope = new TriangleWedge(PxTransform(PxVec3(.0f, .0f, .0f)));
 			slope->SetKinematic(true);
 			slope->Color(color_palette[4]);
 
-			left = new RevoluteJoint(NULL, PxTransform(angularTranslate(1.3, -6.7)), flipperLeft, PxTransform(PxVec3(1.3f, 2.f, -7.f)));
-			right = new RevoluteJoint(NULL, PxTransform(angularTranslate(-1.3, -6.7)), flipperRight, PxTransform(PxVec3(-1.3f, 2.f, -7.f)));
+			left = new RevoluteJoint(NULL, PxTransform(angularTranslate(2.5, -7), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f))* PxQuat(radConv(90), PxVec3(0.f, 0.f, 1.f))), flipperLeft, PxTransform(PxVec3(0,0,0)));
+			right = new RevoluteJoint(NULL, PxTransform(angularTranslate(-2.5, -7), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f)) * PxQuat(radConv(-90), PxVec3(0.f, 0.f, 1.f))), flipperRight, PxTransform(PxVec3(0,0,0)));
 			ball = new Sphere(PxTransform((angularTranslate(-5, 0))));
 			ball->Color(color_palette[2]);
 			
@@ -193,24 +195,24 @@ namespace PhysicsEngine
 		/// An example use of key release handling
 		void leftUp()
 		{
-			left->DriveVelocity(-20);
+			left->DriveVelocity(-10);
 		}
 
 		void rightUp()
 		{
-			right->DriveVelocity(-20);
+			right->DriveVelocity(-10);
 		}
 
 		/// An example use of key presse handling
 		void leftFlipper()
 		{
-			left->DriveVelocity(20);
+			left->DriveVelocity(10);
 			cout << "flip left" << endl;
 		}
 
 		void rightFlipper()
 		{
-			right->DriveVelocity(20);
+			right->DriveVelocity(10);
 			cout << "flip right" << endl;
 		}
 	};
