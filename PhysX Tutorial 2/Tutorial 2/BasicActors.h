@@ -161,4 +161,81 @@ namespace PhysicsEngine
 			CreateShape(PxCapsuleGeometry(dimensions.x, dimensions.y), density);
 		}
 	};
-}
+
+	class DistanceJoint : public Joint
+	{
+	public:
+		DistanceJoint(Actor* actor0, const PxTransform& localFrame0, Actor* actor1, const PxTransform& localFrame1)
+		{
+			PxRigidActor* px_actor0 = 0;
+			if (actor0)
+				px_actor0 = (PxRigidActor*)actor0->Get();
+
+			joint = (PxJoint*)PxDistanceJointCreate(*GetPhysics(), px_actor0, localFrame0, (PxRigidActor*)actor1->Get(), localFrame1);
+			joint->setConstraintFlag(PxConstraintFlag::eVISUALIZATION, true);
+			((PxDistanceJoint*)joint)->setDistanceJointFlag(PxDistanceJointFlag::eSPRING_ENABLED, true);
+			Damping(1.f);
+			Stiffness(1.f);
+		}
+
+		void Stiffness(PxReal value)
+		{
+			((PxDistanceJoint*)joint)->setStiffness(value);
+		}
+
+		PxReal Stiffness()
+		{
+			return ((PxDistanceJoint*)joint)->getStiffness();
+		}
+
+		void Damping(PxReal value)
+		{
+			((PxDistanceJoint*)joint)->setDamping(value);
+		}
+
+		PxReal Damping()
+		{
+			return ((PxDistanceJoint*)joint)->getDamping();
+		}
+	};
+
+
+	class Trampoline
+	{
+		vector<DistanceJoint*> springs;
+		Box *bottom, *top;
+
+	public:
+		Trampoline(const PxVec3& dimensions = PxVec3(1.f, 1.f, 1.f), PxReal stiffness = 1.f, PxReal damping = 1.f)
+		{
+			PxReal thickness = .1f;
+			bottom = new Box(PxTransform(PxVec3(0.f, thickness, 0.f)), PxVec3(dimensions.x, thickness, dimensions.z));
+			top = new Box(PxTransform(PxVec3(0.f, dimensions.y + thickness, 0.f)), PxVec3(dimensions.x, thickness, dimensions.z));
+			springs.resize(4);
+			springs[0] = new DistanceJoint(bottom, PxTransform(PxVec3(dimensions.x, thickness, dimensions.z)), top, PxTransform(PxVec3(dimensions.x, -dimensions.y, dimensions.z)));
+			springs[1] = new DistanceJoint(bottom, PxTransform(PxVec3(dimensions.x, thickness, -dimensions.z)), top, PxTransform(PxVec3(dimensions.x, -dimensions.y, -dimensions.z)));
+			springs[2] = new DistanceJoint(bottom, PxTransform(PxVec3(-dimensions.x, thickness, dimensions.z)), top, PxTransform(PxVec3(-dimensions.x, -dimensions.y, dimensions.z)));
+			springs[3] = new DistanceJoint(bottom, PxTransform(PxVec3(-dimensions.x, thickness, -dimensions.z)), top, PxTransform(PxVec3(-dimensions.x, -dimensions.y, -dimensions.z)));
+
+			for (unsigned int i = 0; i < springs.size(); i++)
+			{
+				springs[i]->Stiffness(stiffness);
+				springs[i]->Damping(damping);
+			}
+		}
+
+		void AddToScene(Scene* scene)
+		{
+			scene->Add(bottom);
+			scene->Add(top);
+		}
+
+		~Trampoline()
+		{
+			for (unsigned int i = 0; i < springs.size(); i++)
+				delete springs[i];
+		}
+	};
+	
+
+	}

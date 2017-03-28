@@ -141,5 +141,18 @@ namespace PhysicsEngine
 
 		///a list with all actors
 		std::vector<PxActor*> GetAllActors();
+
+
+	};
+
+	class Joint
+	{
+	protected:
+		PxJoint* joint;
+
+	public:
+		Joint() : joint(0) {}
+
+		PxJoint* Get() { return joint; }
 	};
 }
