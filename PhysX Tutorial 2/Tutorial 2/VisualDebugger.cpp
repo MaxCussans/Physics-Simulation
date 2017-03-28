@@ -90,7 +90,7 @@ namespace VisualDebugger
 	{
 		//initialise HUD
 		//add an empty screen
-		//hud.AddLine(EMPTY, "");
+		hud.AddLine(EMPTY, "");
 		//add a help screen
 		//hud.AddLine(HELP, " Simulation");
 	//hud.AddLine(HELP, "    F9 - select next actor");
@@ -174,7 +174,10 @@ namespace VisualDebugger
 		{
 			//implement your own
 		case 'R':
+			scene->leftFlipper();
 			break;
+		case 'T':
+			scene->rightFlipper();
 		default:
 			break;
 		}
@@ -186,11 +189,15 @@ namespace VisualDebugger
 		{
 			//implement your own
 		case 'R':
+			scene->leftUp();
 			break;
+			case 'T':
+			scene->rightUp();
 		default:
 			break;
 		}
 	}
+
 
 	void UserKeyHold(int key)
 	{
@@ -373,4 +380,6 @@ namespace VisualDebugger
 		delete scene;
 		PhysicsEngine::PxRelease();
 	}
+
+
 }

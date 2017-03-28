@@ -93,8 +93,8 @@ namespace PhysicsEngine
 		FlipperWedge* flipperRight;
 		FlipperWedge* flipperLeft;
 		PxParticleSystem *ps;
-		DistanceJoint* right;
-		DistanceJoint* left;
+		RevoluteJoint* right;
+		RevoluteJoint* left;
 
 	public:
 		///A custom scene class
@@ -155,19 +155,17 @@ namespace PhysicsEngine
 			// end particles
 
 			flipperRight = new FlipperWedge(PxTransform(angularTranslate(-1.2, -7), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f))));
-			flipperRight->SetKinematic(true);
 			flipperRight->GetShape(0)->setLocalPose(PxTransform(PxVec3(0,0.1,0), PxQuat(radConv(90), PxVec3(0.f, 0.f, 1.f)) * PxQuat(radConv(-60), PxVec3(1.f, 0.f, 0.f))));
 
 			flipperLeft = new FlipperWedge(PxTransform(angularTranslate(1.2, -7), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f))));
-			flipperLeft->SetKinematic(true);
 			flipperLeft->GetShape(0)->setLocalPose(PxTransform(PxVec3(0,0.1,0), PxQuat(radConv(-90), PxVec3(0.f, 0.f, 1.f)) * PxQuat(radConv(-60), PxVec3(1.f, 0.f, 0.f))));
 
 			slope = new TriangleWedge(PxTransform(PxVec3(.0f, .0f, .0f)));
 			slope->SetKinematic(true);
 			slope->Color(color_palette[4]);
 
-			left = new DistanceJoint(NULL, PxTransform(angularTranslate(1.3, -6.7)), flipperLeft, PxTransform(angularTranslate(1.1, -7.3)));
-			right = new DistanceJoint(NULL, PxTransform(angularTranslate(-1.3, -6.7)), flipperLeft, PxTransform(angularTranslate(-1.1, -7.3)));
+			left = new RevoluteJoint(NULL, PxTransform(angularTranslate(1.3, -6.7)), flipperLeft, PxTransform(PxVec3(1.3f, 2.f, -7.f)));
+			right = new RevoluteJoint(NULL, PxTransform(angularTranslate(-1.3, -6.7)), flipperLeft, PxTransform(PxVec3(-1.3f, 2.f, -7.f)));
 			ball = new Sphere(PxTransform((angularTranslate(-5, 0))));
 			ball->Color(color_palette[2]);
 			
@@ -188,6 +186,30 @@ namespace PhysicsEngine
 			//PxTransform pose = ((PxRigidBody*)hex->Get())->getGlobalPose();
 			//pose.q *= PxQuat((PxHalfPi / 2)/100, PxVec3(.0f, 1.f, .0f));
 			//((PxRigidBody*)hex->Get())->setGlobalPose(pose);
+		}
+
+		/// An example use of key release handling
+		void leftUp()
+		{
+			left->DriveVelocity(-20);
+		}
+
+		void rightUp()
+		{
+			right->DriveVelocity(-20);
+		}
+
+		/// An example use of key presse handling
+		void leftFlipper()
+		{
+			left->DriveVelocity(20);
+			cout << "flip left" << endl;
+		}
+
+		void rightFlipper()
+		{
+			right->DriveVelocity(20);
+			cout << "flip right" << endl;
 		}
 	};
 }
