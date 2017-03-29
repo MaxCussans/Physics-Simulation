@@ -198,11 +198,11 @@ namespace PhysicsEngine
 			wall3->SetKinematic(true);
 			wall3->Color(color_palette[5]);
 
-			wall4 = new Wall(PxTransform(PxVec3(angularTranslate(5, -4).x, angularTranslate(5, -4).y + .8f, angularTranslate(5, -4).z), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f)) * PxQuat(radConv(45), PxVec3(0.f, 1.f, 0.f))));
+			wall4 = new Wall(PxTransform(PxVec3(angularTranslate(5, -4.18).x, angularTranslate(5, -4.18).y + .8f, angularTranslate(5, -4.18).z), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f)) * PxQuat(radConv(45), PxVec3(0.f, 1.f, 0.f))));
 			wall4->SetKinematic(true);
 			wall4->Color(color_palette[5]);
 
-			wall5 = new Wall(PxTransform(PxVec3(angularTranslate(-3.5, -4.8).x, angularTranslate(-3.5, -4.3).y + .8f, angularTranslate(-3.5, -4.3).z), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f)) * PxQuat(radConv(-45), PxVec3(0.f, 1.f, 0.f))));
+			wall5 = new Wall(PxTransform(PxVec3(angularTranslate(-3.5, -4.62).x, angularTranslate(-3.5, -4.62).y + .8f, angularTranslate(-3.5, -4.62).z), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f)) * PxQuat(radConv(-45), PxVec3(0.f, 1.f, 0.f))));
 			wall5->SetKinematic(true);
 			wall5->Color(color_palette[5]);
 
