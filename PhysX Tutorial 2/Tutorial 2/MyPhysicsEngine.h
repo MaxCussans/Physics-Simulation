@@ -106,6 +106,7 @@ namespace PhysicsEngine
 		Wall* wall3;
 		Wall* wall4;
 		Wall* wall5;
+		Ceiling* ceiling;
 
 	public:
 		///A custom scene class
@@ -133,7 +134,7 @@ namespace PhysicsEngine
 			Add(plane);
 			//create compound object
 			obj = new RectangleEnclosure(PxTransform(PxVec3(.0f, 0.f,2.f), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f,0.f))));
-			obj->SetKinematic(true);
+			obj->SetKinematic(true);	
 			//angle in degrees
 			obj->GetShape(0)->setLocalPose(PxTransform(PxVec3(0.f, 5.2f, 11.9f), PxQuat(radConv(90), PxVec3(1.f, 0.f, 0.f))));
 			obj->GetShape(1)->setLocalPose(PxTransform(PxVec3(0.f, 5.2f, -11.9f), PxQuat(radConv(90), PxVec3(1.f, 0.f, 0.f))));
@@ -141,6 +142,9 @@ namespace PhysicsEngine
 			obj->GetShape(3)->setLocalPose(PxTransform(PxVec3(-6.f, 5.2f, .0f)));
 
 			obj->Color(color_palette[5]);
+
+			//ceiling = new Ceiling(PxTransform(PxVec3(.0f,(angularTranslate(0.f,0.f)).y + 1.f, .0f) , PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f))));
+			//ceiling->SetKinematic(true);
 			//add box
 			//box = new Box(PxTransform(PxVec3(.0f, 3.f, .0f)));
 			//box->Color(color_palette[4]);
@@ -225,6 +229,7 @@ namespace PhysicsEngine
 			Add(wall3);
 			Add(wall4);
 			Add(wall5);
+			//Add(ceiling);
 			
 		}
 
