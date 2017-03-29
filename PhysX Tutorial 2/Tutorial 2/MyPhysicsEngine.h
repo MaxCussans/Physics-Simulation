@@ -13,9 +13,8 @@ namespace PhysicsEngine
 		PxVec3(255.f/255.f,45.f/255.f,0.f/255.f),PxVec3(255.f/255.f,140.f/255.f,54.f/255.f),PxVec3(4.f/255.f,117.f/255.f,111.f/255.f)};
 	const int wedgeh = 8;
 	const int wedgel = 12;
-
+	PxTransform ballPos;
 	static bool gameOver = false;
-	static int score = 0;
 
 	//pyramid vertices
 	static PxVec3 pyramid_verts[] = {PxVec3(0,1,0), PxVec3(1,0,0), PxVec3(-1,0,0), PxVec3(0,0,1), PxVec3(0,0,-1)};
@@ -58,7 +57,7 @@ namespace PhysicsEngine
 	class FlipperRWedge : public ConvexMesh
 	{
 	public:
-		FlipperRWedge(PxTransform pose = PxTransform(PxIdentity), PxReal density = 100.f) :
+		FlipperRWedge(PxTransform pose = PxTransform(PxIdentity), PxReal density = 10000.f) :
 			ConvexMesh(vector<PxVec3>(begin(flipperR_verts), end(flipperR_verts)), pose, density)
 		{
 		}
@@ -67,7 +66,7 @@ namespace PhysicsEngine
 	class FlipperLWedge : public ConvexMesh
 	{
 	public:
-		FlipperLWedge(PxTransform pose = PxTransform(PxIdentity), PxReal density = 100.f) :
+		FlipperLWedge(PxTransform pose = PxTransform(PxIdentity), PxReal density = 10000.f) :
 			ConvexMesh(vector<PxVec3>(begin(flipperL_verts), end(flipperL_verts)), pose, density)
 		{
 		}
@@ -103,6 +102,8 @@ namespace PhysicsEngine
 
 	public:
 		///A custom scene class
+		int score = 0;
+
 		void SetVisualisation()
 		{
 			px_scene->setVisualizationParameter(PxVisualizationParameter::eSCALE, 1.0f);
@@ -196,10 +197,12 @@ namespace PhysicsEngine
 			//PxTransform pose = ((PxRigidBody*)hex->Get())->getGlobalPose();
 			//pose.q *= PxQuat((PxHalfPi / 2)/100, PxVec3(.0f, 1.f, .0f));
 			//((PxRigidBody*)hex->Get())->setGlobalPose(pose);
-			if(gameOver!= true)
+			if(gameOver == false)
 			{
-				score += 1;
+				score ++;
 			}
+
+			ballPos = ball->GetShape(0)->getLocalPose();
 		}
 
 		/// An example use of key release handling

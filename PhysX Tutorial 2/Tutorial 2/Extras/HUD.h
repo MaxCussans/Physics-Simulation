@@ -72,6 +72,19 @@ namespace VisualDebugger
 			screens.back()->AddLine(line);
 		}
 
+		void UpdateLine(int screen_id, string line)
+		{
+			Clear();
+			for (unsigned int i = 0; i < screens.size(); i++)
+			{
+				if (screens[i]->id == screen_id)
+				{
+					screens[i]->AddLine(line);
+					return;
+				}
+			}
+			screens.back()->AddLine(line);
+		}
 		///Set the active screen
 		void ActiveScreen(int value)
 		{

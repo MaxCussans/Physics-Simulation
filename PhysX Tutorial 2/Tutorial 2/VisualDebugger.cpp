@@ -56,7 +56,6 @@ namespace VisualDebugger
 		PhysicsEngine::PxInit();
 		scene = new PhysicsEngine::MyScene();
 		scene->Init();
-
 		///Init renderer
 		Renderer::BackgroundColor(PxVec3(150.f / 255.f, 150.f / 255.f, 150.f / 255.f));
 		Renderer::SetRenderDetail(40);
@@ -92,10 +91,10 @@ namespace VisualDebugger
 	void HUDInit()
 	{
 		//initialise HUD
-		//add an empty screen
+		////add an empty screen
 		hud.AddLine(EMPTY, "");
 		//add a help screen
-	hud.AddLine(HELP, "Score");
+	hud.AddLine(HELP, "Score:");
 	//hud.AddLine(HELP, "    F9 - select next actor");
 	//hud.AddLine(HELP, "    F10 - pause");
 	//hud.AddLine(HELP, "    F12 - reset");
@@ -132,10 +131,12 @@ namespace VisualDebugger
 	//Render the scene and perform a single simulation step
 	void RenderScene()
 	{
+		int score = scene->score;
 		//handle pressed keys
 		KeyHold();
 		//start rendering
 		Renderer::Start(camera->getEye(), camera->getDir());
+		hud.UpdateLine(HELP,"Score: " +  to_string(score));
 
 		if ((render_mode == DEBUG) || (render_mode == BOTH))
 		{
