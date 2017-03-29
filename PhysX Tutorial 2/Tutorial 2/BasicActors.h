@@ -253,7 +253,7 @@ namespace PhysicsEngine
 
 		void Plunge()
 		{
-			top->Get()->isRigidDynamic()->addForce(PxVec3(0, 100,200));
+			top->Get()->isRigidDynamic()->addForce(PxVec3(0, 250,500));
 		}
 
 		void AddToScene(Scene* scene)
