@@ -20,7 +20,7 @@ namespace PhysicsEngine
 	static PxVec3 wedge_verts[] = { PxVec3(-6.2,0,-wedgel), PxVec3(-6.2,0,wedgel), PxVec3(-6.2,wedgeh,wedgel), PxVec3(6.2,0, -wedgel), PxVec3(6.2,0,wedgel), PxVec3(6.2,wedgeh,wedgel) };
 	static PxVec3 flipperR_verts[] = { PxVec3(-.2, 0, -1.5), PxVec3(-.2, 0, 0), PxVec3(-.2, 0.2, 0), PxVec3(0, 0 , -1.5), PxVec3(0, 0, 0), PxVec3(0, 0.2, 0) };
 	static PxVec3 flipperL_verts[] = { PxVec3(.2, 0, -1.5), PxVec3(.2, 0, 0), PxVec3(.2, 0.2, 0), PxVec3(0, 0 , -1.5), PxVec3(0, 0, 0), PxVec3(0, 0.2, 0) };
-	static PxVec3 hex_verts[] = { PxVec3(0,0,0), PxVec3(-1,1,0), PxVec3(-1, (1+ sqrt(2)) ,0), PxVec3(0,(2 + sqrt(2)),0), PxVec3((sqrt(2)),(2 + sqrt(2)),0), PxVec3(sqrt(2)+ 1, 1 + sqrt(2),0), PxVec3((sqrt(2) + 1), 1 ,0), PxVec3(sqrt(2), 0, 0),
+	static PxVec3 oct_verts[] = { PxVec3(0,0,0), PxVec3(-1,1,0), PxVec3(-1, (1+ sqrt(2)) ,0), PxVec3(0,(2 + sqrt(2)),0), PxVec3((sqrt(2)),(2 + sqrt(2)),0), PxVec3(sqrt(2)+ 1, 1 + sqrt(2),0), PxVec3((sqrt(2) + 1), 1 ,0), PxVec3(sqrt(2), 0, 0),
 		PxVec3(0,0,1), PxVec3(-1,1,1), PxVec3(-1, (1 + sqrt(2)) ,1), PxVec3(0,(2 + sqrt(2)),1), PxVec3((sqrt(2)),(2 + sqrt(2)),1), PxVec3(sqrt(2) + 1,1 + sqrt(2),1), PxVec3(sqrt(2) + 1, 1 ,1), PxVec3(sqrt(2), 0, 1) };
 	//pyramid triangles: a list of three vertices for each triangle e.g. the first triangle consists of vertices 1, 4 and 0
 	//vertices have to be specified in a counter-clockwise order to assure the correct shading in rendering
@@ -71,11 +71,11 @@ namespace PhysicsEngine
 		}
 	};
 
-	class Hexagon : public ConvexMesh
+	class Octagon : public ConvexMesh
 	{
 	public:
-		Hexagon(PxTransform pose = PxTransform(PxIdentity), PxReal density = 1.f) :
-			ConvexMesh(vector<PxVec3>(begin(hex_verts), end(hex_verts)), pose, density)
+		Octagon(PxTransform pose = PxTransform(PxIdentity), PxReal density = 1.f) :
+			ConvexMesh(vector<PxVec3>(begin(oct_verts), end(oct_verts)), pose, density)
 		{
 		}
 	};
@@ -89,7 +89,9 @@ namespace PhysicsEngine
 		//initialise compound object
 		RectangleEnclosure* obj;
 		Box* box;
-		Hexagon* hex;
+		Octagon* oct1;
+		Octagon* oct2;
+		Octagon* oct3;
 		TriangleWedge* slope;
 		Sphere* ball;
 		FlipperRWedge* flipperRight;
@@ -98,6 +100,7 @@ namespace PhysicsEngine
 		RevoluteJoint* right;
 		RevoluteJoint* left;
 		Trampoline* plunger;
+		PlungeAisle* plungeaisle;
 
 	public:
 		///A custom scene class
@@ -136,8 +139,9 @@ namespace PhysicsEngine
 			//add box
 			//box = new Box(PxTransform(PxVec3(.0f, 3.f, .0f)));
 			//box->Color(color_palette[4]);
-			//hex = new Hexagon(PxTransform(PxVec3(.0f, 3.f, .0f)));
-			//hex->Color(color_palette[5]);
+			oct1 = new Octagon(PxTransform(PxVec3(angularTranslate(0, 7).x, angularTranslate(0,7).y + 1, angularTranslate(0,7).z), PxQuat(radConv(71.5), PxVec3(1.f, 0.f, 0.f))));
+			oct1->SetKinematic(true);
+			oct1->Color(color_palette[5]);
 			// particles
 			//ps = GetPhysics()->createParticleSystem(50, false);
 			////this->px_scene->addActor(*ps);
@@ -161,11 +165,11 @@ namespace PhysicsEngine
 			//ps->releaseParticles();
 			// end particles
 
-			flipperRight = new FlipperRWedge(PxTransform(angularTranslate(-3.5, -7), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f))));
+			flipperRight = new FlipperRWedge(PxTransform(angularTranslate(-2.5, -7), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f))));
 			//flipperRight->SetKinematic(true);
 			//flipperRight->GetShape(0)->setLocalPose(PxTransform(PxVec3(0,0.1,0), PxQuat(radConv(90), PxVec3(0.f, 0.f, 1.f)) * PxQuat(radConv(-60), PxVec3(1.f, 0.f, 0.f))));
 
-			flipperLeft = new FlipperLWedge(PxTransform(angularTranslate(3.5, -7), PxQuat(radConv(-90), PxVec3(0.f, 0.f, 1.f))));
+			flipperLeft = new FlipperLWedge(PxTransform(angularTranslate(2.5, -7), PxQuat(radConv(-90), PxVec3(0.f, 0.f, 1.f))));
 			//flipperLeft->SetKinematic(true);
 			//flipperLeft->GetShape(0)->setLocalPose(PxTransform(PxVec3(0,0.1,0), PxQuat(radConv(-90), PxVec3(0.f, 0.f, 1.f)) * PxQuat(radConv(-60), PxVec3(1.f, 0.f, 0.f))));
 
@@ -173,19 +177,24 @@ namespace PhysicsEngine
 			slope->SetKinematic(true);
 			slope->Color(color_palette[4]);
 
-			left = new RevoluteJoint(NULL, PxTransform(angularTranslate(2.5, -7), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f))* PxQuat(radConv(90), PxVec3(0.f, 0.f, 1.f))), flipperLeft, PxTransform(PxVec3(0,0,0)));
-			right = new RevoluteJoint(NULL, PxTransform(angularTranslate(-2.5, -7), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f)) * PxQuat(radConv(-90), PxVec3(0.f, 0.f, 1.f))), flipperRight, PxTransform(PxVec3(0,0,0)));
+			plungeaisle = new PlungeAisle(PxTransform(angularTranslate(-4.5, -1.2), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f))));
+			plungeaisle->SetKinematic(true);
+			plungeaisle->Color(color_palette[5]);
+
+			left = new RevoluteJoint(NULL, PxTransform(angularTranslate(1.5, -7), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f))* PxQuat(radConv(90), PxVec3(0.f, 0.f, 1.f))), flipperLeft, PxTransform(PxVec3(0,0,0)));
+			right = new RevoluteJoint(NULL, PxTransform(angularTranslate(-1.5, -7), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f)) * PxQuat(radConv(-90), PxVec3(0.f, 0.f, 1.f))), flipperRight, PxTransform(PxVec3(0,0,0)));
 			ball = new Sphere(PxTransform((angularTranslate(-5.5, 0))));
 			ball->Color(color_palette[2]);
 			plunger = new Trampoline;
 			plunger->AddToScene(this);
-			//Add(hex);
+			Add(oct1);
 			//Add(box);  
 			Add(obj);
 			Add(ball);
 			Add(flipperRight);
 			Add(flipperLeft);
 			Add(slope);
+			Add(plungeaisle);
 			
 		}
 

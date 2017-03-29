@@ -85,6 +85,20 @@ namespace PhysicsEngine
 		}
 	};
 
+	class PlungeAisle : public DynamicActor
+	{
+	public:
+		//a Box with default parameters:
+		// - pose in 0,0,0
+		// - dimensions: 1m x 1m x 1m
+		// - denisty: 1kg/m^3
+		PlungeAisle(const PxTransform& pose = PxTransform(PxIdentity), PxVec3 dimensions = PxVec3(.3f, 1.f, 10.f), PxReal density = 1.f)
+			: DynamicActor(pose)
+		{
+			CreateShape(PxBoxGeometry(dimensions), density);
+		}
+	};
+
 	class Capsule : public DynamicActor
 	{
 	public:
