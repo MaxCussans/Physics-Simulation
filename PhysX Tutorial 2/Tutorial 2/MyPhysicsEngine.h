@@ -14,6 +14,9 @@ namespace PhysicsEngine
 	const int wedgeh = 8;
 	const int wedgel = 12;
 
+	static bool gameOver = false;
+	static int score = 0;
+
 	//pyramid vertices
 	static PxVec3 pyramid_verts[] = {PxVec3(0,1,0), PxVec3(1,0,0), PxVec3(-1,0,0), PxVec3(0,0,1), PxVec3(0,0,-1)};
 	static PxVec3 wedge_verts[] = { PxVec3(-6.2,0,-wedgel), PxVec3(-6.2,0,wedgel), PxVec3(-6.2,wedgeh,wedgel), PxVec3(6.2,0, -wedgel), PxVec3(6.2,0,wedgel), PxVec3(6.2,wedgeh,wedgel) };
@@ -193,6 +196,10 @@ namespace PhysicsEngine
 			//PxTransform pose = ((PxRigidBody*)hex->Get())->getGlobalPose();
 			//pose.q *= PxQuat((PxHalfPi / 2)/100, PxVec3(.0f, 1.f, .0f));
 			//((PxRigidBody*)hex->Get())->setGlobalPose(pose);
+			if(gameOver!= true)
+			{
+				score += 1;
+			}
 		}
 
 		/// An example use of key release handling
@@ -210,13 +217,18 @@ namespace PhysicsEngine
 		void leftFlipper()
 		{
 			left->DriveVelocity(10);
-			cout << "flip left" << endl;
+			//cout << "flip left" << endl;
 		}
 
 		void rightFlipper()
 		{
 			right->DriveVelocity(10);
-			cout << "flip right" << endl;
+			//cout << "flip right" << endl;
 		}
+
+		/*void plunger()
+		{
+			plunger->addforce;
+		}*/
 	};
 }

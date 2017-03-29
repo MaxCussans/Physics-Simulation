@@ -45,7 +45,7 @@ namespace PhysicsEngine
 		// - pose in 0,0,0
 		// - dimensions: 1m
 		// - denisty: 1kg/m^3
-		Sphere(const PxTransform& pose=PxTransform(PxIdentity), PxReal radius=.25f, PxReal density=1.f) 
+		Sphere(const PxTransform& pose=PxTransform(PxIdentity), PxReal radius=.25f, PxReal density=.01f) 
 			: DynamicActor(pose)
 		{ 
 			CreateShape(PxSphereGeometry(radius), density);
@@ -209,25 +209,40 @@ namespace PhysicsEngine
 		{
 			return ((PxDistanceJoint*)joint)->getDamping();
 		}
+
+	
 	};
 
 
-	class Trampoline
+	class Trampoline : public Joint
 	{
 		vector<DistanceJoint*> springs;
 		Box *bottom, *top;
 
 	public:
-		Trampoline(const PxVec3& dimensions = PxVec3(.5f, .1f, .5f), PxReal stiffness = .1f, PxReal damping = .1f)
+		Trampoline(const PxVec3& dimensions = PxVec3(1.f, 1.f, 1.f), PxReal stiffness = 5.f, PxReal damping = 1.f)
 		{
-			PxReal thickness = 1.f;
+			PxReal thickness = .5f;
 			bottom = new Box(PxTransform(PxVec3(angularTranslate(-5.5,-7)), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f)))), PxVec3(dimensions.x, thickness, dimensions.z);
-			top = new Box(PxTransform(PxVec3(-5.5f, dimensions.y + 1.f, -7.f), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f)))), PxVec3(dimensions.x, thickness, dimensions.z);
+			bottom->GetShape(0)->setLocalPose(PxTransform(PxVec3(0.f, 0.3f, 0.f)));
+			bottom->SetKinematic(true);
+			top = new Box(PxTransform(PxVec3(angularTranslate(-5.5, -6.8)), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f)))), PxVec3(dimensions.x, thickness, dimensions.z);
+			//top->SetKinematic(true);
+			top->GetShape(0)->setLocalPose(PxTransform(PxVec3(0.f, 0.3f, 0.f)));
 			springs.resize(4);
-			springs[0] = new DistanceJoint(bottom, PxTransform(PxVec3(dimensions.x, thickness, dimensions.z)), top, PxTransform(PxVec3(dimensions.x, -dimensions.y, dimensions.z)));
-			springs[1] = new DistanceJoint(bottom, PxTransform(PxVec3(dimensions.x, thickness, -dimensions.z)), top, PxTransform(PxVec3(dimensions.x, -dimensions.y, -dimensions.z)));
-			springs[2] = new DistanceJoint(bottom, PxTransform(PxVec3(-dimensions.x, thickness, dimensions.z)), top, PxTransform(PxVec3(-dimensions.x, -dimensions.y, dimensions.z)));
-			springs[3] = new DistanceJoint(bottom, PxTransform(PxVec3(-dimensions.x, thickness, -dimensions.z)), top, PxTransform(PxVec3(-dimensions.x, -dimensions.y, -dimensions.z)));
+			springs[0] = new DistanceJoint(bottom, PxTransform(PxVec3(angularTranslate(-5.5,-7).x + dimensions.x, angularTranslate(-5.5,-7).y + thickness, angularTranslate(-5.5, -7).z + dimensions.z), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f))), top, PxTransform(PxVec3(angularTranslate(-5.5, -6.8).x + dimensions.x, angularTranslate(-5.5, -6.8).y - dimensions.y, angularTranslate(-5.5, -6.8).z + dimensions.z), PxQuat(radConv(-18.5), PxVec3(1.f,0.f,0.f))));
+
+			springs[1] = new DistanceJoint(bottom, PxTransform(PxVec3(angularTranslate(-5.5, -7).x + dimensions.x, angularTranslate(-5.5, -7).y + thickness, angularTranslate(-5.5, -7).z - dimensions.z), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f))), top, PxTransform(PxVec3(angularTranslate(-5.5, -6.8).x + dimensions.x, angularTranslate(-5.5, -6.8).y -dimensions.y, angularTranslate(-5.5, -6.8).z - dimensions.z), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f))));
+
+			springs[2] = new DistanceJoint(bottom, PxTransform(PxVec3(angularTranslate(-5.5, -7).x - dimensions.x, angularTranslate(-5.5, -7).y + thickness, angularTranslate(-5.5, -7).z + dimensions.z), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f))), top, PxTransform(PxVec3(angularTranslate(-5.5, -6.8).x - dimensions.x, angularTranslate(-5.5, -6.8).y -dimensions.y, angularTranslate(-5.5, -6.8).z + dimensions.z), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f))));
+
+			springs[3] = new DistanceJoint(bottom, PxTransform(PxVec3(angularTranslate(-5.5, -7).x - dimensions.x, angularTranslate(-5.5, -7).y + thickness, angularTranslate(-5.5, -7).z - dimensions.z), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f))), top, PxTransform(PxVec3(angularTranslate(-5.5, -6.8).x - dimensions.x, angularTranslate(-5.5, -6.8).y - dimensions.y, angularTranslate(-5.5, -6.8).z - dimensions.z), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f))));
+
+
+			//springs[0] = new DistanceJoint(bottom, PxTransform(PxVec3(dimensions.x, thickness, dimensions.z)), top, PxTransform(PxVec3(dimensions.x, -dimensions.y, dimensions.z)));
+			//springs[1] = new DistanceJoint(bottom, PxTransform(PxVec3(dimensions.x, thickness, -dimensions.z)), top, PxTransform(PxVec3(dimensions.x, -dimensions.y, -dimensions.z)));
+			//springs[2] = new DistanceJoint(bottom, PxTransform(PxVec3(-dimensions.x, thickness, dimensions.z)), top, PxTransform(PxVec3(-dimensions.x, -dimensions.y, dimensions.z)));
+			//springs[3] = new DistanceJoint(bottom, PxTransform(PxVec3(-dimensions.x, thickness, -dimensions.z)), top, PxTransform(PxVec3(-dimensions.x, -dimensions.y, -dimensions.z)));
 
 			for (unsigned int i = 0; i < springs.size(); i++)
 			{

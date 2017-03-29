@@ -3,6 +3,7 @@
 #include "Extras\Camera.h"
 #include "Extras\Renderer.h"
 #include "Extras\HUD.h"
+#include "MyPhysicsEngine.h"
 
 namespace VisualDebugger
 {
@@ -45,6 +46,8 @@ namespace VisualDebugger
 	bool key_state[MAX_KEYS];
 	bool hud_show = true;
 	HUD hud;
+	
+	
 
 	//Init the debugger
 	void Init(const char *window_name, int width, int height)
@@ -92,7 +95,7 @@ namespace VisualDebugger
 		//add an empty screen
 		hud.AddLine(EMPTY, "");
 		//add a help screen
-		//hud.AddLine(HELP, " Simulation");
+	hud.AddLine(HELP, "Score");
 	//hud.AddLine(HELP, "    F9 - select next actor");
 	//hud.AddLine(HELP, "    F10 - pause");
 	//hud.AddLine(HELP, "    F12 - reset");
@@ -109,11 +112,11 @@ namespace VisualDebugger
 	//hud.AddLine(HELP, "");
 	//hud.AddLine(HELP, " Force (applied to the selected actor)");
 	//hud.AddLine(HELP, "    I,K,J,L,U,M - forward,backward,left,right,up,down");
-	////add a pause screen
-	//hud.AddLine(PAUSE, "");
-	//hud.AddLine(PAUSE, "");
-	//hud.AddLine(PAUSE, "");
-	//hud.AddLine(PAUSE, "   Simulation paused. Press F10 to continue.");
+	//add a pause screen
+	hud.AddLine(PAUSE, "");
+	hud.AddLine(PAUSE, "");
+	hud.AddLine(PAUSE, "");
+	hud.AddLine(PAUSE, "   Game paused. Press F10 to continue.");
 		//set font size for all screens
 		hud.FontSize(0.018f);
 		//set font color for all screens
@@ -193,6 +196,10 @@ namespace VisualDebugger
 			break;
 			case 'T':
 			scene->rightUp();
+			break;
+			//case ' '
+			//scene->plunger();
+			//break;
 		default:
 			break;
 		}
