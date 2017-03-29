@@ -202,7 +202,7 @@ namespace PhysicsEngine
 			wall4->SetKinematic(true);
 			wall4->Color(color_palette[5]);
 
-			wall5 = new Wall(PxTransform(PxVec3(angularTranslate(-3.5, -4.3).x, angularTranslate(-3.5, -4.3).y + .8f, angularTranslate(-3.5, -4.3).z), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f)) * PxQuat(radConv(-45), PxVec3(0.f, 1.f, 0.f))));
+			wall5 = new Wall(PxTransform(PxVec3(angularTranslate(-3.5, -4.8).x, angularTranslate(-3.5, -4.3).y + .8f, angularTranslate(-3.5, -4.3).z), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f)) * PxQuat(radConv(-45), PxVec3(0.f, 1.f, 0.f))));
 			wall5->SetKinematic(true);
 			wall5->Color(color_palette[5]);
 
