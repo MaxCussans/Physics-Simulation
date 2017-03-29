@@ -197,9 +197,9 @@ namespace VisualDebugger
 			case 'T':
 			scene->rightUp();
 			break;
-			//case ' '
-			//scene->plunger();
-			//break;
+			case ' ':
+			scene->plunge();
+			break;
 		default:
 			break;
 		}

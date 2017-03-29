@@ -226,9 +226,9 @@ namespace PhysicsEngine
 			//cout << "flip right" << endl;
 		}
 
-		/*void plunger()
+		void plunge()
 		{
-			plunger->addforce;
-		}*/
+			plunger->Plunge();
+		}
 	};
 }
