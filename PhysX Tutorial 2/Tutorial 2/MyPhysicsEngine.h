@@ -101,6 +101,7 @@ namespace PhysicsEngine
 		RevoluteJoint* left;
 		Trampoline* plunger;
 		PlungeAisle* plungeaisle;
+		Wall* wall;
 
 	public:
 		///A custom scene class
@@ -177,9 +178,13 @@ namespace PhysicsEngine
 			slope->SetKinematic(true);
 			slope->Color(color_palette[4]);
 
-			plungeaisle = new PlungeAisle(PxTransform(angularTranslate(-4.5, -1.2), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f))));
+			plungeaisle = new PlungeAisle(PxTransform(angularTranslate(-4.8, -1.2), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f))));
 			plungeaisle->SetKinematic(true);
 			plungeaisle->Color(color_palette[5]);
+
+			wall = new Wall(PxTransform(PxVec3(angularTranslate(-4.8, 10.5).x, angularTranslate(-4.8, 10.5).y + .8f,angularTranslate(-4.8, 10.5).z), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f)) * PxQuat(radConv(45), PxVec3(0.f, 1.f, 0.f))));
+			wall->SetKinematic(true);
+			wall->Color(color_palette[5]);
 
 			left = new RevoluteJoint(NULL, PxTransform(angularTranslate(1.5, -7), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f))* PxQuat(radConv(90), PxVec3(0.f, 0.f, 1.f))), flipperLeft, PxTransform(PxVec3(0,0,0)));
 			right = new RevoluteJoint(NULL, PxTransform(angularTranslate(-1.5, -7), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f)) * PxQuat(radConv(-90), PxVec3(0.f, 0.f, 1.f))), flipperRight, PxTransform(PxVec3(0,0,0)));
@@ -195,6 +200,7 @@ namespace PhysicsEngine
 			Add(flipperLeft);
 			Add(slope);
 			Add(plungeaisle);
+			Add(wall);
 			
 		}
 

@@ -24,6 +24,19 @@ namespace PhysicsEngine
 		return coords;
 	}
 
+	class Wall : public DynamicActor
+	{
+	public:
+		//a Box with default parameters:
+		// - pose in 0,0,0
+		// - dimensions: 1m x 1m x 1m
+		// - denisty: 1kg/m^3
+		Wall(const PxTransform& pose = PxTransform(PxIdentity), PxVec3 dimensions = PxVec3(.1f, .8f, 1.5f), PxReal density = 1.f)
+			: DynamicActor(pose)
+		{
+			CreateShape(PxBoxGeometry(dimensions), density);
+		}
+	};
 
 	///Plane class
 	class Plane : public StaticActor
