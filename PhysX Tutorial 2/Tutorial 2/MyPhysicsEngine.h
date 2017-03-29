@@ -13,8 +13,7 @@ namespace PhysicsEngine
 		PxVec3(255.f/255.f,45.f/255.f,0.f/255.f),PxVec3(255.f/255.f,140.f/255.f,54.f/255.f),PxVec3(4.f/255.f,117.f/255.f,111.f/255.f)};
 	const int wedgeh = 8;
 	const int wedgel = 12;
-	PxTransform ballPos;
-	static bool gameOver = false;
+	static bool gameOver = true;
 
 	//pyramid vertices
 	static PxVec3 pyramid_verts[] = {PxVec3(0,1,0), PxVec3(1,0,0), PxVec3(-1,0,0), PxVec3(0,0,1), PxVec3(0,0,-1)};
@@ -197,12 +196,18 @@ namespace PhysicsEngine
 			//PxTransform pose = ((PxRigidBody*)hex->Get())->getGlobalPose();
 			//pose.q *= PxQuat((PxHalfPi / 2)/100, PxVec3(.0f, 1.f, .0f));
 			//((PxRigidBody*)hex->Get())->setGlobalPose(pose);
+			
 			if(gameOver == false)
 			{
 				score ++;
 			}
 
-			ballPos = ball->GetShape(0)->getLocalPose();
+		
+
+			if (ball->Get()->isRigidDynamic()->getGlobalPose().p.y < 1.f)
+			{
+				gameOver = true;
+			}
 		}
 
 		/// An example use of key release handling
@@ -232,6 +237,10 @@ namespace PhysicsEngine
 		void plunge()
 		{
 			plunger->Plunge();
+			if(ball->Get()->isRigidDynamic()->getGlobalPose().p.y > 1.f)
+			{
+			gameOver = false;
+			}
 		}
 	};
 }
