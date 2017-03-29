@@ -56,7 +56,7 @@ namespace PhysicsEngine
 	class FlipperRWedge : public ConvexMesh
 	{
 	public:
-		FlipperRWedge(PxTransform pose = PxTransform(PxIdentity), PxReal density = 10000.f) :
+		FlipperRWedge(PxTransform pose = PxTransform(PxIdentity), PxReal density = 1000000.f) :
 			ConvexMesh(vector<PxVec3>(begin(flipperR_verts), end(flipperR_verts)), pose, density)
 		{
 		}
@@ -65,7 +65,7 @@ namespace PhysicsEngine
 	class FlipperLWedge : public ConvexMesh
 	{
 	public:
-		FlipperLWedge(PxTransform pose = PxTransform(PxIdentity), PxReal density = 10000.f) :
+		FlipperLWedge(PxTransform pose = PxTransform(PxIdentity), PxReal density = 1000000.f) :
 			ConvexMesh(vector<PxVec3>(begin(flipperL_verts), end(flipperL_verts)), pose, density)
 		{
 		}
@@ -102,6 +102,10 @@ namespace PhysicsEngine
 		Trampoline* plunger;
 		PlungeAisle* plungeaisle;
 		Wall* wall;
+		Wall* wall2;
+		Wall* wall3;
+		Wall* wall4;
+		Wall* wall5;
 
 	public:
 		///A custom scene class
@@ -178,7 +182,7 @@ namespace PhysicsEngine
 			slope->SetKinematic(true);
 			slope->Color(color_palette[4]);
 
-			plungeaisle = new PlungeAisle(PxTransform(angularTranslate(-4.8, -1.2), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f))));
+			plungeaisle = new PlungeAisle(PxTransform(angularTranslate(-4.7, -1.2), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f))));
 			plungeaisle->SetKinematic(true);
 			plungeaisle->Color(color_palette[5]);
 
@@ -186,8 +190,24 @@ namespace PhysicsEngine
 			wall->SetKinematic(true);
 			wall->Color(color_palette[5]);
 
-			left = new RevoluteJoint(NULL, PxTransform(angularTranslate(1.5, -7), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f))* PxQuat(radConv(90), PxVec3(0.f, 0.f, 1.f))), flipperLeft, PxTransform(PxVec3(0,0,0)));
-			right = new RevoluteJoint(NULL, PxTransform(angularTranslate(-1.5, -7), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f)) * PxQuat(radConv(-90), PxVec3(0.f, 0.f, 1.f))), flipperRight, PxTransform(PxVec3(0,0,0)));
+			wall2 = new Wall(PxTransform(PxVec3(angularTranslate(-2, -6.05).x, angularTranslate(-2, -6.05).y + .8f, angularTranslate(-2, -6.05).z), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f)) * PxQuat(radConv(-45), PxVec3(0.f, 1.f, 0.f))));
+			wall2->SetKinematic(true);
+			wall2->Color(color_palette[5]);
+
+			wall3 = new Wall(PxTransform(PxVec3(angularTranslate(3, -6.05).x, angularTranslate(3, -6.05).y + .8f, angularTranslate(3, -6.05).z), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f)) * PxQuat(radConv(45), PxVec3(0.f, 1.f, 0.f))));
+			wall3->SetKinematic(true);
+			wall3->Color(color_palette[5]);
+
+			wall4 = new Wall(PxTransform(PxVec3(angularTranslate(5, -4).x, angularTranslate(5, -4).y + .8f, angularTranslate(5, -4).z), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f)) * PxQuat(radConv(45), PxVec3(0.f, 1.f, 0.f))));
+			wall4->SetKinematic(true);
+			wall4->Color(color_palette[5]);
+
+			wall5 = new Wall(PxTransform(PxVec3(angularTranslate(-3.5, -4.3).x, angularTranslate(-3.5, -4.3).y + .8f, angularTranslate(-3.5, -4.3).z), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f)) * PxQuat(radConv(-45), PxVec3(0.f, 1.f, 0.f))));
+			wall5->SetKinematic(true);
+			wall5->Color(color_palette[5]);
+
+			left = new RevoluteJoint(NULL, PxTransform(angularTranslate(2, -7), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f))* PxQuat(radConv(90), PxVec3(0.f, 0.f, 1.f))), flipperLeft, PxTransform(PxVec3(0,0,0)));
+			right = new RevoluteJoint(NULL, PxTransform(angularTranslate(-1, -7), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f)) * PxQuat(radConv(-90), PxVec3(0.f, 0.f, 1.f))), flipperRight, PxTransform(PxVec3(0,0,0)));
 			ball = new Sphere(PxTransform((angularTranslate(-5.5, 0))));
 			ball->Color(color_palette[2]);
 			plunger = new Trampoline;
@@ -201,6 +221,10 @@ namespace PhysicsEngine
 			Add(slope);
 			Add(plungeaisle);
 			Add(wall);
+			Add(wall2);
+			Add(wall3);
+			Add(wall4);
+			Add(wall5);
 			
 		}
 
@@ -228,24 +252,24 @@ namespace PhysicsEngine
 		/// An example use of key release handling
 		void leftUp()
 		{
-			left->DriveVelocity(-10);
+			left->DriveVelocity(-30);
 		}
 
 		void rightUp()
 		{
-			right->DriveVelocity(-10);
+			right->DriveVelocity(-30);
 		}
 
 		/// An example use of key presse handling
 		void leftFlipper()
 		{
-			left->DriveVelocity(10);
+			left->DriveVelocity(30);
 			//cout << "flip left" << endl;
 		}
 
 		void rightFlipper()
 		{
-			right->DriveVelocity(10);
+			right->DriveVelocity(30);
 			//cout << "flip right" << endl;
 		}
 

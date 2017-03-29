@@ -58,7 +58,7 @@ namespace PhysicsEngine
 		// - pose in 0,0,0
 		// - dimensions: 1m
 		// - denisty: 1kg/m^3
-		Sphere(const PxTransform& pose=PxTransform(PxIdentity), PxReal radius=.25f, PxReal density=.01f) 
+		Sphere(const PxTransform& pose=PxTransform(PxIdentity), PxReal radius=.22f, PxReal density=.01f) 
 			: DynamicActor(pose)
 		{ 
 			CreateShape(PxSphereGeometry(radius), density);
@@ -307,7 +307,7 @@ namespace PhysicsEngine
 
 			joint = PxRevoluteJointCreate(*GetPhysics(), px_actor0, localFrame0, (PxRigidActor*)actor1->Get(), localFrame1);
 			joint->setConstraintFlag(PxConstraintFlag::eVISUALIZATION, true);
-			DriveVelocity(-10);
+			DriveVelocity(-30);
 			SetLimits(PxPi / 4, (radConv(90) + radConv(22.5)));
 		}
 
