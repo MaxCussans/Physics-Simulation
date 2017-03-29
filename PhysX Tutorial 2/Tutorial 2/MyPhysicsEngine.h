@@ -79,16 +79,7 @@ namespace PhysicsEngine
 		}
 	};
 	
-	static PxVec3 angularTranslate(PxReal x, PxReal z)
-	{
-		//angle of board
-		float tans = 8.0f / (24.0f);
-		float angle = atan(tans);
-		//the distance to move down using the height at 0
-		PxReal y = 4.0f + (z * tan(angle));
-		PxVec3 coords(x, y, z);
-		return coords;
-	}
+
 
 	///Custom scene class
 	class MyScene : public Scene
@@ -105,6 +96,7 @@ namespace PhysicsEngine
 		PxParticleSystem *ps;
 		RevoluteJoint* right;
 		RevoluteJoint* left;
+		Trampoline* plunger;
 
 	public:
 		///A custom scene class
@@ -180,9 +172,10 @@ namespace PhysicsEngine
 
 			left = new RevoluteJoint(NULL, PxTransform(angularTranslate(2.5, -7), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f))* PxQuat(radConv(90), PxVec3(0.f, 0.f, 1.f))), flipperLeft, PxTransform(PxVec3(0,0,0)));
 			right = new RevoluteJoint(NULL, PxTransform(angularTranslate(-2.5, -7), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f)) * PxQuat(radConv(-90), PxVec3(0.f, 0.f, 1.f))), flipperRight, PxTransform(PxVec3(0,0,0)));
-			ball = new Sphere(PxTransform((angularTranslate(-5, 0))));
+			ball = new Sphere(PxTransform((angularTranslate(-5.5, 0))));
 			ball->Color(color_palette[2]);
-			
+			plunger = new Trampoline;
+			plunger->AddToScene(this);
 			//Add(hex);
 			//Add(box);  
 			Add(obj);

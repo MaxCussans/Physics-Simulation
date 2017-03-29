@@ -13,6 +13,18 @@ namespace PhysicsEngine
 		return rad;
 	}
 
+	static PxVec3 angularTranslate(PxReal x, PxReal z)
+	{
+		//angle of board
+		float tans = 8.0f / (24.0f);
+		float angle = atan(tans);
+		//the distance to move down using the height at 0
+		PxReal y = 4.0f + (z * tan(angle));
+		PxVec3 coords(x, y, z);
+		return coords;
+	}
+
+
 	///Plane class
 	class Plane : public StaticActor
 	{
@@ -206,11 +218,11 @@ namespace PhysicsEngine
 		Box *bottom, *top;
 
 	public:
-		Trampoline(const PxVec3& dimensions = PxVec3(1.f, 1.f, 1.f), PxReal stiffness = 1.f, PxReal damping = 1.f)
+		Trampoline(const PxVec3& dimensions = PxVec3(.5f, .1f, .5f), PxReal stiffness = .1f, PxReal damping = .1f)
 		{
-			PxReal thickness = .1f;
-			bottom = new Box(PxTransform(PxVec3(0.f, thickness, 0.f)), PxVec3(dimensions.x, thickness, dimensions.z));
-			top = new Box(PxTransform(PxVec3(0.f, dimensions.y + thickness, 0.f)), PxVec3(dimensions.x, thickness, dimensions.z));
+			PxReal thickness = 1.f;
+			bottom = new Box(PxTransform(PxVec3(angularTranslate(-5.5,-7)), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f)))), PxVec3(dimensions.x, thickness, dimensions.z);
+			top = new Box(PxTransform(PxVec3(-5.5f, dimensions.y + 1.f, -7.f), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f)))), PxVec3(dimensions.x, thickness, dimensions.z);
 			springs.resize(4);
 			springs[0] = new DistanceJoint(bottom, PxTransform(PxVec3(dimensions.x, thickness, dimensions.z)), top, PxTransform(PxVec3(dimensions.x, -dimensions.y, dimensions.z)));
 			springs[1] = new DistanceJoint(bottom, PxTransform(PxVec3(dimensions.x, thickness, -dimensions.z)), top, PxTransform(PxVec3(dimensions.x, -dimensions.y, -dimensions.z)));
@@ -283,5 +295,5 @@ namespace PhysicsEngine
 		}
 	};
 	
-
+	
 	}
