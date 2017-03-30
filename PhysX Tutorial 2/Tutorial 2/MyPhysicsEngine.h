@@ -142,6 +142,8 @@ namespace PhysicsEngine
 		Wall* wall5;
 		Ceiling* ceiling;
 
+		
+
 	public:
 		///A custom scene class
 		MyScene() : Scene(CustomFilterShader) {};
@@ -165,6 +167,9 @@ namespace PhysicsEngine
 
 			GetMaterial()->setDynamicFriction(.2f);
 
+			//materials
+			PxMaterial* default_material = GetPhysics()->createMaterial(0.f, 0.f, 0.9f);			PxMaterial* pinger = GetPhysics()->createMaterial(0.f, 0.f, 4.f);
+
 			plane = new Plane();
 			plane->Color(PxVec3(210.f/255.f,210.f/255.f,210.f/255.f));
 			Add(plane);
@@ -176,9 +181,9 @@ namespace PhysicsEngine
 			obj->GetShape(1)->setLocalPose(PxTransform(PxVec3(0.f, 5.2f, -11.9f), PxQuat(radConv(90), PxVec3(1.f, 0.f, 0.f))));
 			obj->GetShape(2)->setLocalPose(PxTransform(PxVec3(6.f, 5.2f, .0f)));
 			obj->GetShape(3)->setLocalPose(PxTransform(PxVec3(-6.f, 5.2f, .0f)));
-
+			obj->Material(default_material);
 			obj->Color(color_palette[5]);
-
+
 			//ceiling = new Ceiling(PxTransform(PxVec3(.0f,(angularTranslate(0.f,0.f)).y + 1.f, .0f) , PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f))));
 			//ceiling->SetKinematic(true);
 			//add box
@@ -186,6 +191,7 @@ namespace PhysicsEngine
 			//box->Color(color_palette[4]);
 			oct1 = new Octagon(PxTransform(PxVec3(angularTranslate(0, 7).x, angularTranslate(0,7).y + 1, angularTranslate(0,7).z), PxQuat(radConv(71.5), PxVec3(1.f, 0.f, 0.f))));
 			oct1->SetKinematic(true);
+			oct1->Material(pinger);
 			oct1->Color(color_palette[5]);
 			// particles
 			//ps = GetPhysics()->createParticleSystem(50, false);
@@ -226,26 +232,32 @@ namespace PhysicsEngine
 
 			plungeaisle = new PlungeAisle(PxTransform(angularTranslate(-4.7, -1.2), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f))));
 			plungeaisle->SetKinematic(true);
+			plungeaisle->Material(default_material);
 			plungeaisle->Color(color_palette[5]);
 
 			wall = new Wall(PxTransform(PxVec3(angularTranslate(-4.8, 10.5).x, angularTranslate(-4.8, 10.5).y + .8f,angularTranslate(-4.8, 10.5).z), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f)) * PxQuat(radConv(45), PxVec3(0.f, 1.f, 0.f))));
 			wall->SetKinematic(true);
+			wall->Material(default_material);
 			wall->Color(color_palette[5]);
 
 			wall2 = new Wall(PxTransform(PxVec3(angularTranslate(-2, -6.05).x, angularTranslate(-2, -6.05).y + .8f, angularTranslate(-2, -6.05).z), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f)) * PxQuat(radConv(-45), PxVec3(0.f, 1.f, 0.f))));
 			wall2->SetKinematic(true);
+			wall2->Material(default_material);
 			wall2->Color(color_palette[5]);
 
 			wall3 = new Wall(PxTransform(PxVec3(angularTranslate(3, -6.05).x, angularTranslate(3, -6.05).y + .8f, angularTranslate(3, -6.05).z), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f)) * PxQuat(radConv(45), PxVec3(0.f, 1.f, 0.f))));
 			wall3->SetKinematic(true);
+			wall3->Material(default_material);
 			wall3->Color(color_palette[5]);
 
 			wall4 = new Wall(PxTransform(PxVec3(angularTranslate(5, -4.18).x, angularTranslate(5, -4.18).y + .8f, angularTranslate(5, -4.18).z), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f)) * PxQuat(radConv(45), PxVec3(0.f, 1.f, 0.f))));
 			wall4->SetKinematic(true);
+			wall4->Material(default_material);
 			wall4->Color(color_palette[5]);
 
 			wall5 = new Wall(PxTransform(PxVec3(angularTranslate(-3.5, -4.62).x, angularTranslate(-3.5, -4.62).y + .8f, angularTranslate(-3.5, -4.62).z), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f)) * PxQuat(radConv(-45), PxVec3(0.f, 1.f, 0.f))));
 			wall5->SetKinematic(true);
+			wall5->Material(default_material);
 			wall5->Color(color_palette[5]);
 
 			left = new RevoluteJoint(NULL, PxTransform(angularTranslate(2, -7), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f))* PxQuat(radConv(90), PxVec3(0.f, 0.f, 1.f))), flipperLeft, PxTransform(PxVec3(0,0,0)));
