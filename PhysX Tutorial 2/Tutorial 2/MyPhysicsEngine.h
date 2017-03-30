@@ -168,7 +168,7 @@ namespace PhysicsEngine
 			GetMaterial()->setDynamicFriction(.2f);
 
 			//materials
-			PxMaterial* default_material = GetPhysics()->createMaterial(0.f, 0.f, 0.9f);			PxMaterial* pinger = GetPhysics()->createMaterial(0.f, 0.f, 4.f);
+			PxMaterial* default_material = GetPhysics()->createMaterial(0.f, 0.f, 0.9f);			PxMaterial* pinger = GetPhysics()->createMaterial(0.f, 0.f, 3.f);
 
 			plane = new Plane();
 			plane->Color(PxVec3(210.f/255.f,210.f/255.f,210.f/255.f));
