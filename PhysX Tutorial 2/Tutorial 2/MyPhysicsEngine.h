@@ -124,8 +124,7 @@ namespace PhysicsEngine
 		RectangleEnclosure* obj;
 		Box* box;
 		Octagon* oct1;
-		Octagon* oct2;
-		Octagon* oct3;
+		Octagon* octTrigger;
 		TriangleWedge* slope;
 		Sphere* ball;
 		FlipperRWedge* flipperRight;
@@ -193,6 +192,9 @@ namespace PhysicsEngine
 			oct1->SetKinematic(true);
 			oct1->Material(pinger);
 			oct1->Color(color_palette[5]);
+
+			
+
 			// particles
 			//ps = GetPhysics()->createParticleSystem(50, false);
 			////this->px_scene->addActor(*ps);
