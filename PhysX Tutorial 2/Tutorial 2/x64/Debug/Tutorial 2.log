@@ -6,12 +6,12 @@ c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial
 c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(22): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
 c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(23): warning C4244: 'argument': conversion from 'double' to 'physx::PxReal', possible loss of data
 c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(24): warning C4244: 'argument': conversion from 'double' to 'physx::PxReal', possible loss of data
-c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(189): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
-c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(193): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
-c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(197): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
-c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(201): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
-c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(205): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
-c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(209): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
+c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(227): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
+c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(231): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
+c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(235): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
+c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(239): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
+c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(243): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
+c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(247): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
   VisualDebugger.cpp
 c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\basicactors.h(271): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
 c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(20): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
@@ -20,12 +20,12 @@ c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial
 c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(22): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
 c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(23): warning C4244: 'argument': conversion from 'double' to 'physx::PxReal', possible loss of data
 c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(24): warning C4244: 'argument': conversion from 'double' to 'physx::PxReal', possible loss of data
-c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(189): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
-c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(193): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
-c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(197): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
-c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(201): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
-c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(205): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
-c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(209): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
+c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(227): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
+c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(231): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
+c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(235): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
+c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(239): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
+c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(243): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
+c:\users\computing\documents\github\physics-simulation\physx tutorial 2\tutorial 2\myphysicsengine.h(247): warning C4305: 'argument': truncation from 'double' to 'physx::PxReal'
   PhysicsEngine.cpp
   Renderer.cpp
   GLFontRenderer.cpp

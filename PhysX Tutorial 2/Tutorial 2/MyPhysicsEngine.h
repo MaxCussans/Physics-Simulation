@@ -18,8 +18,8 @@ namespace PhysicsEngine
 	//pyramid vertices
 	static PxVec3 pyramid_verts[] = {PxVec3(0,1,0), PxVec3(1,0,0), PxVec3(-1,0,0), PxVec3(0,0,1), PxVec3(0,0,-1)};
 	static PxVec3 wedge_verts[] = { PxVec3(-6.2,0,-wedgel), PxVec3(-6.2,0,wedgel), PxVec3(-6.2,wedgeh,wedgel), PxVec3(6.2,0, -wedgel), PxVec3(6.2,0,wedgel), PxVec3(6.2,wedgeh,wedgel) };
-	static PxVec3 flipperR_verts[] = { PxVec3(-.2, 0, -1.5), PxVec3(-.2, 0, 0), PxVec3(-.2, 0.2, 0), PxVec3(0, 0 , -1.5), PxVec3(0, 0, 0), PxVec3(0, 0.2, 0) };
-	static PxVec3 flipperL_verts[] = { PxVec3(.2, 0, -1.5), PxVec3(.2, 0, 0), PxVec3(.2, 0.2, 0), PxVec3(0, 0 , -1.5), PxVec3(0, 0, 0), PxVec3(0, 0.2, 0) };
+	static PxVec3 flipperR_verts[] = { PxVec3(-.5, 0, -1.5), PxVec3(-.5, 0, 0), PxVec3(-.5, 0.2, 0), PxVec3(0, 0 , -1.5), PxVec3(0, 0, 0), PxVec3(0, 0.2, 0) };
+	static PxVec3 flipperL_verts[] = { PxVec3(.5, 0, -1.5), PxVec3(.5, 0, 0), PxVec3(.5, 0.2, 0), PxVec3(0, 0 , -1.5), PxVec3(0, 0, 0), PxVec3(0, 0.2, 0) };
 	static PxVec3 oct_verts[] = { PxVec3(0,0,0), PxVec3(-1,1,0), PxVec3(-1, (1+ sqrt(2)) ,0), PxVec3(0,(2 + sqrt(2)),0), PxVec3((sqrt(2)),(2 + sqrt(2)),0), PxVec3(sqrt(2)+ 1, 1 + sqrt(2),0), PxVec3((sqrt(2) + 1), 1 ,0), PxVec3(sqrt(2), 0, 0),
 		PxVec3(0,0,1), PxVec3(-1,1,1), PxVec3(-1, (1 + sqrt(2)) ,1), PxVec3(0,(2 + sqrt(2)),1), PxVec3((sqrt(2)),(2 + sqrt(2)),1), PxVec3(sqrt(2) + 1,1 + sqrt(2),1), PxVec3(sqrt(2) + 1, 1 ,1), PxVec3(sqrt(2), 0, 1) };
 	//pyramid triangles: a list of three vertices for each triangle e.g. the first triangle consists of vertices 1, 4 and 0
@@ -79,12 +79,46 @@ namespace PhysicsEngine
 		{
 		}
 	};
+
+	static PxFilterFlags CustomFilterShader(PxFilterObjectAttributes attributes0, PxFilterData filterData0,
+		PxFilterObjectAttributes attributes1, PxFilterData filterData1,
+		PxPairFlags& pairFlags, const void* constantBlock, PxU32 constantBlockSize)
+	{
+		// let triggers through
+		if (PxFilterObjectIsTrigger(attributes0) || PxFilterObjectIsTrigger(attributes1))
+		{
+			pairFlags = PxPairFlag::eTRIGGER_DEFAULT;
+			return PxFilterFlags();
+		}
+
+		pairFlags = PxPairFlag::eCONTACT_DEFAULT;
+		//enable continous collision detection
+		pairFlags |= PxPairFlag::eCCD_LINEAR;
+
+
+		//customise collision filtering here
+		//e.g.
+
+		// trigger the contact callback for pairs (A,B) where 
+		// the filtermask of A contains the ID of B and vice versa.
+		if ((filterData0.word0 & filterData1.word1) && (filterData1.word0 & filterData0.word1))
+		{
+			//trigger onContact callback for this pair of objects
+			pairFlags |= PxPairFlag::eNOTIFY_TOUCH_FOUND;
+			pairFlags |= PxPairFlag::eNOTIFY_TOUCH_LOST;
+			//			pairFlags |= PxPairFlag::eNOTIFY_CONTACT_POINTS;
+		}
+
+		return PxFilterFlags();
+	};
 	
 
 
 	///Custom scene class
 	class MyScene : public Scene
 	{
+
+		
 		Plane* plane;
 		//initialise compound object
 		RectangleEnclosure* obj;
@@ -110,6 +144,8 @@ namespace PhysicsEngine
 
 	public:
 		///A custom scene class
+		MyScene() : Scene(CustomFilterShader) {};
+
 		int score = 0;
 
 		void SetVisualisation()
@@ -175,10 +211,12 @@ namespace PhysicsEngine
 			// end particles
 
 			flipperRight = new FlipperRWedge(PxTransform(angularTranslate(-2.5, -7), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f))));
+			flipperRight->Get()->isRigidDynamic()->setRigidBodyFlag(PxRigidBodyFlag::eENABLE_CCD, true);
 			//flipperRight->SetKinematic(true);
 			//flipperRight->GetShape(0)->setLocalPose(PxTransform(PxVec3(0,0.1,0), PxQuat(radConv(90), PxVec3(0.f, 0.f, 1.f)) * PxQuat(radConv(-60), PxVec3(1.f, 0.f, 0.f))));
 
 			flipperLeft = new FlipperLWedge(PxTransform(angularTranslate(2.5, -7), PxQuat(radConv(-90), PxVec3(0.f, 0.f, 1.f))));
+			flipperLeft->Get()->isRigidDynamic()->setRigidBodyFlag(PxRigidBodyFlag::eENABLE_CCD, true);
 			//flipperLeft->SetKinematic(true);
 			//flipperLeft->GetShape(0)->setLocalPose(PxTransform(PxVec3(0,0.1,0), PxQuat(radConv(-90), PxVec3(0.f, 0.f, 1.f)) * PxQuat(radConv(-60), PxVec3(1.f, 0.f, 0.f))));
 
@@ -214,6 +252,8 @@ namespace PhysicsEngine
 			right = new RevoluteJoint(NULL, PxTransform(angularTranslate(-1, -7), PxQuat(radConv(-18.5), PxVec3(1.f, 0.f, 0.f)) * PxQuat(radConv(-90), PxVec3(0.f, 0.f, 1.f))), flipperRight, PxTransform(PxVec3(0,0,0)));
 			ball = new Sphere(PxTransform((angularTranslate(-5.5, 0))));
 			ball->Color(color_palette[2]);
+			ball->Get()->isRigidDynamic()->setRigidBodyFlag(PxRigidBodyFlag::eENABLE_CCD, true);
+
 			plunger = new Trampoline;
 			plunger->AddToScene(this);
 			Add(oct1);

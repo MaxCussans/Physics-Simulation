@@ -101,11 +101,15 @@ namespace PhysicsEngine
 		//original and modified colour of the selected actor
 		std::vector<PxVec3> sactor_color_orig;
 
+		PxSimulationFilterShader filter_shader;
+
 		void HighlightOn(PxRigidDynamic* actor);
 
 		void HighlightOff(PxRigidDynamic* actor);
 
 	public:
+
+		Scene(PxSimulationFilterShader custom_filter_shader = PxDefaultSimulationFilterShader) : filter_shader(custom_filter_shader) {}
 		///Init the scene
 		void Init();
 

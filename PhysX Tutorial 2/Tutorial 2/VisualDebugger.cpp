@@ -56,7 +56,7 @@ namespace VisualDebugger
 		PhysicsEngine::PxInit();
 		scene = new PhysicsEngine::MyScene();
 		scene->Init();
-		///Init renderer
+		///Init renderer
 		Renderer::BackgroundColor(PxVec3(150.f / 255.f, 150.f / 255.f, 150.f / 255.f));
 		Renderer::SetRenderDetail(40);
 		Renderer::InitWindow(window_name, width, height);

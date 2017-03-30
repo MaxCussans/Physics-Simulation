@@ -222,9 +222,11 @@ namespace PhysicsEngine
 			sceneDesc.cpuDispatcher = mCpuDispatcher;
 		}
 
-		sceneDesc.filterShader = PxDefaultSimulationFilterShader;
+		sceneDesc.filterShader = filter_shader;
 
-		px_scene = GetPhysics()->createScene(sceneDesc);
+		sceneDesc.flags |= PxSceneFlag::eENABLE_CCD;
+
+		//px_scene = GetPhysics()->createScene(sceneDesc);
 
 		if (!px_scene)
 			throw new Exception("PhysicsEngine::Scene::Init, Could not initialise the scene.");
